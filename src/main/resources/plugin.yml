@@ -1,0 +1,9 @@
+name: Randomizer
+version: '1.0'
+main: me.tigerx4.randomizer.Randomizer
+api-version: '1.20'
+author: TigerX4
+commands:
+  randomizer:
+    description: "Command to enable/disable Randomizer"
+    usage: "Usage: /<command> [start|stop]"

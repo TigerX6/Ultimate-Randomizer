@@ -1,0 +1,13 @@
+block_drops:
+  randomize_block_drops: true
+    # a random number between 1 and max_block_drops will determine the amount of items dropped:
+  # WARNING: very high values may result in very high amounts of items being dropped thus causing lag
+  max_block_drops: 20
+
+mob_drops:
+  randomize_mob_drops: true
+  randomize_mob_xp_drops: true
+  # a random number between 1 and max_mob_xp will determine the amount of xp dropped:
+  max_mob_xp: 50
+
+show_timer: true
