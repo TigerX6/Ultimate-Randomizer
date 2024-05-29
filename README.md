@@ -15,3 +15,12 @@
 |:---------------------:|:----------------------:|:----------------------:|
 | /randomizer **start** | `randomizer.randomizer`| enables the randomizer |
 | /randomizer **stop**  | `randomizer.randomizer`| disables the randomizer|
+
+
+
+[![GitHub Issues]](https://github.com/TigerX6/Ultimate-Randomizer/issues)
+
+
+[//]: # (Data)
+
+[GitHub Issues]: https://img.shields.io/github/issues/TigerX6/Ultimate-Randomizer
