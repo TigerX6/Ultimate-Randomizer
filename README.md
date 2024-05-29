@@ -1,6 +1,6 @@
 # Ultimate Randomizer - Minecraft randomizer plugin
 
-## Challenge yourself or your friends to beat the Ender Dragon with Ultimate Randomizer! Ultimate Randomizer is a simple yet highly configurable Minecraft plugin that randomizes block and Mob drops.
+### Challenge yourself or your friends to beat the Ender Dragon with Ultimate Randomizer! Ultimate Randomizer is a simple yet highly configurable Minecraft plugin that randomizes block and Mob drops.
 
 
 
@@ -17,9 +17,11 @@
 | /randomizer **stop**  | `randomizer.randomizer`| disables the randomizer|
 
 
+## Links
 
 [![GitHub Issues]](https://github.com/TigerX6/Ultimate-Randomizer/issues)
 
+Download on Modrinth: https://modrinth.com/plugin/ultimate-randomizer
 
 [//]: # (Data)
 
