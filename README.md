@@ -21,7 +21,7 @@
 
 [![GitHub Issues]](https://github.com/TigerX6/Ultimate-Randomizer/issues)
 
-Download on Modrinth: https://modrinth.com/plugin/ultimate-randomizer
+[Download on Modrinth](https://modrinth.com/plugin/ultimate-randomizer)
 
 [//]: # (Data)
 
