@@ -12,7 +12,7 @@ mob_drops:
 
 show_timer: true
 
-# plugin messages support Adventure Minimessage formatting. Visit https://docs.advntr.dev/minimessage/ for more information
+# plugin messages support Adventure Minimessage formatting. Visit https://docs.advntr.dev/minimessage/format.html for more information
 plugin-messages:
   prefix: "[<rainbow>Randomizer</rainbow>]"
   randomizer-on: "Randomizer is now <bold><green>ON"
