@@ -1,6 +1,6 @@
 block_drops:
   randomize_block_drops: true
-    # a random number between 1 and max_block_drops will determine the amount of items dropped:
+  # a random number between 1 and max_block_drops will determine the amount of items dropped:
   # WARNING: very high values may result in very high amounts of items being dropped thus causing lag
   max_block_drops: 20
 
@@ -11,3 +11,13 @@ mob_drops:
   max_mob_xp: 50
 
 show_timer: true
+
+# plugin messages support Adventure Minimessage formatting. Visit https://docs.advntr.dev/minimessage/ for more information
+plugin-messages:
+  prefix: "[<rainbow>Randomizer</rainbow>]"
+  randomizer-on: "Randomizer is now <bold><green>ON"
+  randomizer-off: "Randomizer is now <bold><red>OFF"
+  permission-error: "<red><bold>Error:</bold> You don't have the required permission to use that"
+  argument-error: "<red><bold>Error:</bold> Could not run with the arguments supplied"
+  already-enabled: "<red><bold>Error:</bold> Randomizer is already ON"
+  already-disabled: "<red><bold>Error:</bold> Randomizer is already OFF"
