@@ -1,7 +1,7 @@
 name: Randomizer
 version: '1.1'
 main: me.tigerx4.randomizer.Randomizer
-api-version: '1.20'
+api-version: '1.13'
 author: TigerX4
 commands:
   randomizer:
