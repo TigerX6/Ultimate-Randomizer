@@ -17,7 +17,7 @@ plugin-messages:
   prefix: "[<rainbow>Randomizer</rainbow>]"
   randomizer-on: "Randomizer is now <bold><green>ON"
   randomizer-off: "Randomizer is now <bold><red>OFF"
-  randomizer-shuffled: "Randomizer has been shuffled!"
+  randomizer-shuffled: "Randomizer has been shuffled"
   permission-error: "<red><bold>Error:</bold> You don't have the required permission to use that"
   argument-error: "<red><bold>Error:</bold> Could not run with the arguments supplied"
   already-enabled: "<red><bold>Error:</bold> Randomizer is already ON"
