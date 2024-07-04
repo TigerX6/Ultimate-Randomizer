@@ -18,6 +18,10 @@ import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.seconds
 
 class ChallengeCommand(plugin: Randomizer) : TabExecutor {
+
+    private val mobDeathListener = plugin.mobDeathListener
+    private val blockBreakListener = plugin.blockBreakListener
+
     var challengeStatus = "end"
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
@@ -26,6 +30,7 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
+        // error handling
         if (sender !is Player) return false
         fun sendPermissionError() {
             sender.sendMessage(
@@ -48,6 +53,7 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
             return false
         }
 
+        // start subcommand
         if (args[0] == "start") {
             if (sender.hasPermission("randomizer.start")) {
                 if (challengeStatus == "start") {
@@ -73,6 +79,7 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
             sendPermissionError()
         }
 
+        // stop subcommand
         if (args[0] == "stop") {
             if (sender.hasPermission("randomizer.stop")) {
                 if (challengeStatus == "end") {
@@ -98,10 +105,26 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
             sendPermissionError()
         }
 
+        // shuffle subcommand
+        if (args[0] == "shuffle") {
+            if (sender.hasPermission("randomizer.shuffle")) {
+                blockBreakListener.shuffle()
+                mobDeathListener.shuffle()
+                sender.sendMessage(
+                    prefix.append(
+                        mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled")}")
+                    )
+                )
+                return true
+            }
+            sendPermissionError()
+        }
+
         sendArgsError()
         return false
     }
 
+    // Timer
     private val executorService: ScheduledExecutorService = Executors.newScheduledThreadPool(0)
     private var scheduledFuture: ScheduledFuture<*>? = null
     private var elapsedS = 0.seconds
@@ -132,6 +155,7 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
         elapsedS = 0.seconds
     }
 
+    // Tab-Completion
     override fun onTabComplete(
         sender: CommandSender,
         command: Command,
@@ -139,7 +163,7 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
         args: Array<out String>
     ): MutableList<String> {
         return if (args.size == 1) {
-            mutableListOf("start", "stop")
+            mutableListOf("start", "stop", "shuffle")
         } else {
             mutableListOf("")
         }
