@@ -1,4 +1,4 @@
-package me.tigerx4.randomizer
+package me.tigerx4.randomizer.main
 
 import me.tigerx4.randomizer.commands.ChallengeCommand
 import me.tigerx4.randomizer.listeners.BlockBreakListener
@@ -32,7 +32,7 @@ class Randomizer : JavaPlugin() {
         // fix for circular references
         mobDeathListener.challengeCommand = challengeCommand
         blockBreakListener.challengeCommand = challengeCommand
-        
+
         getCommand("randomizer")?.setExecutor(challengeCommand)
     }
 }

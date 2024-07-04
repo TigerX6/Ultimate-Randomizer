@@ -1,6 +1,6 @@
 package me.tigerx4.randomizer.listeners
 
-import me.tigerx4.randomizer.Randomizer
+import me.tigerx4.randomizer.main.Randomizer
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

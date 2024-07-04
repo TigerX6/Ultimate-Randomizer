@@ -1,6 +1,6 @@
 package me.tigerx4.randomizer.commands
 
-import me.tigerx4.randomizer.Randomizer
+import me.tigerx4.randomizer.main.Randomizer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
