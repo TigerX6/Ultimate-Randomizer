@@ -1,7 +1,6 @@
 package me.tigerx4.randomizer.listeners
 
 import me.tigerx4.randomizer.Randomizer
-import me.tigerx4.randomizer.commands.ChallengeCommand
 import org.bukkit.Material
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Mob
@@ -12,10 +11,16 @@ import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
 
-class MobDeathListener(private val challengeCommand: ChallengeCommand, plugin: Randomizer) : Listener {
+class MobDeathListener(plugin: Randomizer) : Listener {
+
+    var challengeCommand = plugin.challengeCommand
 
     private val randomItemMap: MutableMap<Material, Material> = mutableMapOf()
     private val config: FileConfiguration = plugin.config
+
+    fun shuffle() {
+        randomItemMap.clear()
+    }
 
     @EventHandler
     fun onEntityDeath(event: EntityDeathEvent) {

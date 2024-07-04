@@ -1,7 +1,6 @@
 package me.tigerx4.randomizer.listeners
 
 import me.tigerx4.randomizer.Randomizer
-import me.tigerx4.randomizer.commands.ChallengeCommand
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -10,10 +9,16 @@ import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
 
-class BlockBreakListener(private val challengeCommand: ChallengeCommand, plugin: Randomizer) : Listener {
+class BlockBreakListener(plugin: Randomizer) : Listener {
+
+    var challengeCommand = plugin.challengeCommand
 
     private val randomItemMap: MutableMap<Material, Material> = mutableMapOf()
     private val config = plugin.config
+
+    fun shuffle() {
+        randomItemMap.clear()
+    }
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
