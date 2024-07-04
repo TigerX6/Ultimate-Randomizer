@@ -6,4 +6,4 @@ author: TigerX4
 commands:
   randomizer:
     description: "Command to enable/disable Randomizer"
-    usage: "Usage: /<command> <start>/<stop>"
+    usage: "Usage: /<command> [start|stop]"
