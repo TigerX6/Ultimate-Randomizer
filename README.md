@@ -11,14 +11,13 @@
 - a timer starts when you use /randomizer start. This can be disabled in the config (enabled by default)
 
 ## Commands
-| Command               | Permission             | Description            |
-|:---------------------:|:----------------------:|:----------------------:|
-| /randomizer **start** | `randomizer.randomizer`| enables the randomizer |
-| /randomizer **stop**  | `randomizer.randomizer`| disables the randomizer|
-
+| Command                 | Permission             | Description             |
+|:-----------------------:|:----------------------:|:-----------------------:|
+| /randomizer **start**   | `randomizer.start`     | enables the randomizer  |
+| /randomizer **stop**    | `randomizer.stop`      | disables the randomizer |
+| /randomizer **shuffle** | `randomizer.shuffle`   | shuffles the randomizer |
 
 ## Links
-
 [![GitHub Issues]](https://github.com/TigerX6/Ultimate-Randomizer/issues)
 
 [Download on Modrinth](https://modrinth.com/plugin/ultimate-randomizer)
@@ -26,3 +25,10 @@
 [//]: # (Data)
 
 [GitHub Issues]: https://img.shields.io/github/issues/TigerX6/Ultimate-Randomizer
+
+## Upcoming Features
+- player list to exclude players from the randomizer
+- timer formatting options
+- shuffle mob and block drops individually
+- world list
+- randomized chest loot
