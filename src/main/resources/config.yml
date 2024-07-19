@@ -22,3 +22,4 @@ plugin-messages:
   argument-error: "<red><bold>Error:</bold> Could not run with the arguments supplied"
   already-enabled: "<red><bold>Error:</bold> Randomizer is already ON"
   already-disabled: "<red><bold>Error:</bold> Randomizer is already OFF"
+  not-player-error: "<red><bold>Error:</bold> Only players can execute that command"
