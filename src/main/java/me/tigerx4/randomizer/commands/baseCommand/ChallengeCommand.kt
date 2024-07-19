@@ -1,5 +1,8 @@
-package me.tigerx4.randomizer.commands
+package me.tigerx4.randomizer.commands.baseCommand
 
+import me.tigerx4.randomizer.commands.subCommands.Shuffle
+import me.tigerx4.randomizer.commands.subCommands.Start
+import me.tigerx4.randomizer.commands.subCommands.Stop
 import me.tigerx4.randomizer.main.Randomizer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
@@ -17,11 +20,10 @@ import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.seconds
 
-class ChallengeCommand(plugin: Randomizer) : TabExecutor {
+class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
 
-    private val mobDeathListener = plugin.mobDeathListener
-    private val blockBreakListener = plugin.blockBreakListener
-
+    val mobDeathListener = plugin.mobDeathListener
+    val blockBreakListener = plugin.blockBreakListener
     var challengeStatus = "end"
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
@@ -31,7 +33,15 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
         // error handling
-        if (sender !is Player) return false
+        if (sender !is Player) {
+            sender.sendMessage(
+                prefix.append(
+                    mm.deserialize("${config.getString("plugin-messages.not-player-error")}")
+                )
+            )
+            return true
+        }
+
         fun sendPermissionError() {
             sender.sendMessage(
                 prefix.append(
@@ -48,13 +58,55 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
             )
         }
 
-        if (args.size != 1) {
+        // subcommands
+        if (args.isNotEmpty()) {
+            // start
+            if (args[0] == "start") {
+                if (sender.hasPermission("randomizer.start")) {
+                    return if (args.size == 1) {
+                        Start(plugin).onCommand(sender, command, label, args)
+                    } else {
+                        sendArgsError()
+                        return true
+                    }
+                }
+                sendPermissionError()
+                return true
+            }
+
+            // stop
+            if (args[0] == "stop") {
+                if (sender.hasPermission("randomizer.stop")) {
+                    return if (args.size == 1) {
+                        Stop(plugin).onCommand(sender, command, label, args)
+                    } else {
+                        sendArgsError()
+                        return true
+                    }
+                }
+            }
+
+            // shuffle
+            if (args[0] == "shuffle") {
+                if (sender.hasPermission("randomizer.shuffle")) {
+                    return if (args.size == 1) {
+                        Shuffle(plugin, this).onCommand(sender, command, label, args)
+                    } else {
+                        sendArgsError()
+                        return true
+                    }
+                }
+            }
+
+            // players
             sendArgsError()
             return false
         }
+        sendArgsError()
+        return false
 
         // start subcommand
-        if (args[0] == "start") {
+        /*if (args[0] == "start") {
             if (sender.hasPermission("randomizer.start")) {
                 if (challengeStatus == "start") {
                     sender.sendMessage(
@@ -77,10 +129,10 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
                 return true
             }
             sendPermissionError()
-        }
+        }*/
 
         // stop subcommand
-        if (args[0] == "stop") {
+        /*if (args[0] == "stop") {
             if (sender.hasPermission("randomizer.stop")) {
                 if (challengeStatus == "end") {
                     sender.sendMessage(
@@ -103,25 +155,21 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
                 return true
             }
             sendPermissionError()
-        }
+        }*/
 
         // shuffle subcommand
-        if (args[0] == "shuffle") {
+        /*if (args[0] == "shuffle") {
             if (sender.hasPermission("randomizer.shuffle")) {
                 blockBreakListener.shuffle()
                 mobDeathListener.shuffle()
-                sender.sendMessage(
-                    prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled")}")
-                    )
+                Bukkit.broadcast(
+                    prefix
+                        .append(mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled")}"))
                 )
                 return true
             }
             sendPermissionError()
-        }
-
-        sendArgsError()
-        return false
+        }*/
     }
 
     // Timer
@@ -130,7 +178,7 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
     private var elapsedS = 0.seconds
     var timerText = ""
 
-    private fun startTimer() {
+    fun startTimer() {
         scheduledFuture = executorService.scheduleAtFixedRate(
             object : TimerTask() {
                 override fun run() {
@@ -150,7 +198,7 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
         )
     }
 
-    private fun stopTimer() {
+    fun stopTimer() {
         scheduledFuture?.cancel(false)
         elapsedS = 0.seconds
     }
@@ -162,10 +210,11 @@ class ChallengeCommand(plugin: Randomizer) : TabExecutor {
         label: String,
         args: Array<out String>
     ): MutableList<String> {
+
         return if (args.size == 1) {
             mutableListOf("start", "stop", "shuffle")
         } else {
-            mutableListOf("")
+            mutableListOf()
         }
     }
 }

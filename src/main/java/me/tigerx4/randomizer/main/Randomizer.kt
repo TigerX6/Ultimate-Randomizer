@@ -1,6 +1,6 @@
 package me.tigerx4.randomizer.main
 
-import me.tigerx4.randomizer.commands.ChallengeCommand
+import me.tigerx4.randomizer.commands.baseCommand.ChallengeCommand
 import me.tigerx4.randomizer.listeners.BlockBreakListener
 import me.tigerx4.randomizer.listeners.MobDeathListener
 import org.bukkit.plugin.java.JavaPlugin
