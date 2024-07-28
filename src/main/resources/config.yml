@@ -1,7 +1,7 @@
 block_drops:
   randomize_block_drops: true
   # a random number between 1 and max_block_drops will determine the amount of items dropped:
-  # WARNING: very high values may result in very high amounts of items being dropped thus causing lag
+  # WARNING: very high values may result in very high amounts of dropped items causing lag
   max_block_drops: 20
 
 mob_drops:
@@ -12,14 +12,24 @@ mob_drops:
 
 show_timer: true
 
-# plugin messages support Adventure Minimessage formatting. Visit https://docs.advntr.dev/minimessage/format.html for more information
+# plugin messages support Minimessage formatting. Visit https://docs.advntr.dev/minimessage/format.html for more information
 plugin-messages:
   prefix: "[<rainbow>Randomizer</rainbow>]"
-  randomizer-on: "Randomizer is now <bold><green>ON"
-  randomizer-off: "Randomizer is now <bold><red>OFF"
+  randomizer-on: "Randomizer is now <bold><green>enabled"
+  randomizer-off: "Randomizer is now <bold><red>disabled"
+  current-status-on: "Randomizer is currently <bold><green>enabled"
+  current-status-off: "Randomizer is currently <bold><red>disabled"
   randomizer-shuffled: "Randomizer has been shuffled"
   permission-error: "<red><bold>Error:</bold> You don't have the required permission to use that"
-  argument-error: "<red><bold>Error:</bold> Could not run with the arguments supplied"
+  argument-error: "<red><bold>Error:</bold> Could not run with the arguments supplied. Usage: /randomizer <start|stop|players <add|remove>>"
   already-enabled: "<red><bold>Error:</bold> Randomizer is already ON"
   already-disabled: "<red><bold>Error:</bold> Randomizer is already OFF"
   not-player-error: "<red><bold>Error:</bold> Only players can execute that command"
+  current-players: "Current players:"
+  no-current-players: "There are currently no players"
+  added-player: "Added <player> to the player list"
+  player-already-added: "That player was already added to the player list"
+  removed-player: "Removed <player> from the player list"
+  player-already-removed: "That player is not in the player list"
+  added-all-players: "Added all online players to the player list"
+  removed-all-players: "Removed all players from the player list"

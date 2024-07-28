@@ -25,20 +25,21 @@ class MobDeathListener(plugin: Randomizer) : Listener {
     @EventHandler
     fun onEntityDeath(event: EntityDeathEvent) {
         if (challengeCommand.challengeStatus == "start") {
-            val entity = event.entity
-            if (entity is Mob) {
-                if (config.getBoolean("mob_drops.randomize_mob_drops")) {
-                    event.drops.replaceAll {
-                        var material = randomItemMap[it.type]
-                        if (material == null) {
-                            material = Material.entries[Random.nextInt(0, Material.entries.size)]
-                            randomItemMap[it.type] = material
+            if (challengeCommand.randomizerPlayers.contains(event.entity.killer?.name)) {
+                if (event.entity is Mob) {
+                    if (config.getBoolean("mob_drops.randomize_mob_drops")) {
+                        event.drops.replaceAll {
+                            var material = randomItemMap[it.type]
+                            if (material == null) {
+                                material = Material.entries[Random.nextInt(0, Material.entries.size)]
+                                randomItemMap[it.type] = material
+                            }
+                            ItemStack(material, Random.nextInt(1, 10))
                         }
-                        ItemStack(material, Random.nextInt(1, 10))
                     }
-                }
-                if (config.getBoolean("mob_drops.randomize_mob_xp_drops")) {
-                    event.droppedExp = Random.nextInt(1, config.getInt("mob_drops.max_mob_xp"))
+                    if (config.getBoolean("mob_drops.randomize_mob_xp_drops")) {
+                        event.droppedExp = Random.nextInt(1, config.getInt("mob_drops.max_mob_xp"))
+                    }
                 }
             }
         }
