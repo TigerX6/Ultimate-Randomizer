@@ -1,6 +1,6 @@
-package me.tigerx4.randomizer.commands.subCommands
+package io.github.tigerx6.randomizer.commands.subCommands
 
-import me.tigerx4.randomizer.main.Randomizer
+import io.github.tigerx6.randomizer.main.Randomizer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
@@ -9,7 +9,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.FileConfiguration
 
-class Start(plugin: Randomizer) : CommandExecutor {
+class Stop(plugin: Randomizer) : CommandExecutor {
 
     private val challengeCommand = plugin.challengeCommand
     private var challengeStatus = challengeCommand.challengeStatus
@@ -20,23 +20,23 @@ class Start(plugin: Randomizer) : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
-        if (challengeStatus == "start") {
+        if (challengeStatus == "end") {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.already-enabled")}")
+                    mm.deserialize("${config.getString("plugin-messages.already-disabled")}")
                 )
             )
             return true
         }
 
-        challengeCommand.challengeStatus = "start"
+        challengeCommand.challengeStatus = "end"
         Bukkit.broadcast(
             prefix
-                .append(mm.deserialize("${config.getString("plugin-messages.randomizer-on")}"))
+                .append(mm.deserialize("${config.getString("plugin-messages.randomizer-off")}"))
         )
+
         if (config.getBoolean("show_timer")) {
             challengeCommand.stopTimer()
-            challengeCommand.startTimer()
         }
         return true
     }

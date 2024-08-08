@@ -1,7 +1,7 @@
-package me.tigerx4.randomizer.commands.subCommands
+package io.github.tigerx6.randomizer.commands.subCommands
 
-import me.tigerx4.randomizer.commands.baseCommand.ChallengeCommand
-import me.tigerx4.randomizer.main.Randomizer
+import io.github.tigerx6.randomizer.commands.baseCommand.ChallengeCommand
+import io.github.tigerx6.randomizer.main.Randomizer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit

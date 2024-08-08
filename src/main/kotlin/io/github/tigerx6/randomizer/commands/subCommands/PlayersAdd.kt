@@ -1,6 +1,6 @@
-package me.tigerx4.randomizer.commands.subCommands
+package io.github.tigerx6.randomizer.commands.subCommands
 
-import me.tigerx4.randomizer.main.Randomizer
+import io.github.tigerx6.randomizer.main.Randomizer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.minimessage.MiniMessage
@@ -10,7 +10,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.FileConfiguration
 
-class PlayersRemove(plugin: Randomizer) : CommandExecutor {
+class PlayersAdd(plugin: Randomizer) : CommandExecutor {
 
     private val challengeCommand = plugin.challengeCommand
     private val randomizerPlayers = challengeCommand.randomizerPlayers
@@ -23,12 +23,12 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.size == 3) {
             if (args[2] in onlinePlayers) {
-                if (args[2] in randomizerPlayers) {
-                    challengeCommand.randomizerPlayers.remove(args[2])
+                if (args[2] !in randomizerPlayers) {
+                    challengeCommand.randomizerPlayers.add(args[2])
                     sender.sendMessage(
                         prefix.append(
                             mm.deserialize(
-                                "${config.getString("plugin-messages.removed-player")}",
+                                "${config.getString("plugin-messages.added-player")}",
                                 Placeholder.component("player", Component.text(args[2], NamedTextColor.GOLD))
                             )
                         )
@@ -36,15 +36,18 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
                 } else {
                     sender.sendMessage(
                         prefix.append(
-                            mm.deserialize("${config.getString("plugin-messages.player-already-removed")}")
+                            mm.deserialize("${config.getString("plugin-messages.player-already-added")}")
                         )
                     )
                 }
             } else if (args[2] == "@a") {
                 challengeCommand.randomizerPlayers.clear()
+                for (player in onlinePlayers) {
+                    challengeCommand.randomizerPlayers.add(player)
+                }
                 sender.sendMessage(
                     prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.removed-all-players")}")
+                        mm.deserialize("${config.getString("plugin-messages.added-all-players")}")
                     )
                 )
             } else {
@@ -61,7 +64,6 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
                 )
             )
         }
-
         return true
     }
 }

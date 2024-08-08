@@ -1,8 +1,11 @@
-package me.tigerx4.randomizer.main
+package io.github.tigerx6.randomizer.main
 
 import me.tigerx4.randomizer.commands.baseCommand.ChallengeCommand
 import me.tigerx4.randomizer.listeners.BlockBreakListener
 import me.tigerx4.randomizer.listeners.MobDeathListener
+import io.github.tigerx6.randomizer.commands.baseCommand.ChallengeCommand
+import io.github.tigerx6.randomizer.listeners.BlockBreakListener
+import io.github.tigerx6.randomizer.listeners.MobDeathListener
 import org.bukkit.plugin.java.JavaPlugin
 
 class Randomizer : JavaPlugin() {

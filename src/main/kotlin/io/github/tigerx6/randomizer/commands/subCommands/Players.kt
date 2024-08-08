@@ -1,42 +1,39 @@
-package me.tigerx4.randomizer.commands.subCommands
+package io.github.tigerx6.randomizer.commands.subCommands
 
-import me.tigerx4.randomizer.main.Randomizer
+import io.github.tigerx6.randomizer.main.Randomizer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
-import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.FileConfiguration
 
-class Stop(plugin: Randomizer) : CommandExecutor {
+class Players(plugin: Randomizer) : CommandExecutor {
 
     private val challengeCommand = plugin.challengeCommand
-    private var challengeStatus = challengeCommand.challengeStatus
+    private val randomizerPlayers = challengeCommand.randomizerPlayers
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
         .append(Component.text(" "))
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-
-        if (challengeStatus == "end") {
+        if (randomizerPlayers.isNotEmpty()) {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.already-disabled")}")
+                    mm.deserialize(
+                        "${config.getString("plugin-messages.current-players")}\n${
+                            randomizerPlayers.joinToString(",\n")
+                        }"
+                    )
                 )
             )
-            return true
-        }
-
-        challengeCommand.challengeStatus = "end"
-        Bukkit.broadcast(
-            prefix
-                .append(mm.deserialize("${config.getString("plugin-messages.randomizer-off")}"))
-        )
-
-        if (config.getBoolean("show_timer")) {
-            challengeCommand.stopTimer()
+        } else {
+            sender.sendMessage(
+                prefix.append(
+                    mm.deserialize("${config.getString("plugin-messages.no-current-players")}")
+                )
+            )
         }
         return true
     }

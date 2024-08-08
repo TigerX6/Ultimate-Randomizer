@@ -1,8 +1,8 @@
 name: Randomizer
 version: '1.3.0'
-main: me.tigerx4.randomizer.main.Randomizer
+main: io.github.tigerx6.randomizer.main.Randomizer
 api-version: '1.13'
-author: TigerX4
+author: TigerX6
 commands:
   randomizer:
     description: "General command for the Randomizer"

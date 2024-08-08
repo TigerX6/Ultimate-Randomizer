@@ -1,39 +1,42 @@
-package me.tigerx4.randomizer.commands.subCommands
+package io.github.tigerx6.randomizer.commands.subCommands
 
-import me.tigerx4.randomizer.main.Randomizer
+import io.github.tigerx6.randomizer.main.Randomizer
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.FileConfiguration
 
-class Players(plugin: Randomizer) : CommandExecutor {
+class Start(plugin: Randomizer) : CommandExecutor {
 
     private val challengeCommand = plugin.challengeCommand
-    private val randomizerPlayers = challengeCommand.randomizerPlayers
+    private var challengeStatus = challengeCommand.challengeStatus
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
         .append(Component.text(" "))
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (randomizerPlayers.isNotEmpty()) {
+
+        if (challengeStatus == "start") {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize(
-                        "${config.getString("plugin-messages.current-players")}\n${
-                            randomizerPlayers.joinToString(",\n")
-                        }"
-                    )
+                    mm.deserialize("${config.getString("plugin-messages.already-enabled")}")
                 )
             )
-        } else {
-            sender.sendMessage(
-                prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.no-current-players")}")
-                )
-            )
+            return true
+        }
+
+        challengeCommand.challengeStatus = "start"
+        Bukkit.broadcast(
+            prefix
+                .append(mm.deserialize("${config.getString("plugin-messages.randomizer-on")}"))
+        )
+        if (config.getBoolean("show_timer")) {
+            challengeCommand.stopTimer()
+            challengeCommand.startTimer()
         }
         return true
     }
