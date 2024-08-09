@@ -21,7 +21,7 @@ plugin-messages:
   current-status-off: "Randomizer is currently <bold><red>disabled"
   randomizer-shuffled: "Randomizer has been shuffled"
   permission-error: "<red><bold>Error:</bold> You don't have the required permission to use that"
-  argument-error: "<red><bold>Error:</bold> Could not run with the arguments supplied. Usage: /randomizer <start|stop|players <add|remove>>"
+  argument-error: "<red><bold>Error:</bold> Could not run with the arguments supplied."
   already-enabled: "<red><bold>Error:</bold> Randomizer is already ON"
   already-disabled: "<red><bold>Error:</bold> Randomizer is already OFF"
   not-player-error: "<red><bold>Error:</bold> Only players can execute that command"
