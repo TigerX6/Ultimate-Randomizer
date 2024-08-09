@@ -68,6 +68,14 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             if (args[0] == "start") {
                 if (sender.hasPermission("randomizer.start")) {
                     return if (args.size == 1) {
+                        if (randomizerPlayers.isEmpty()) {
+                            sender.sendMessage(
+                                prefix.append(
+                                    mm.deserialize("${config.getString("plugin-messages.empty-player-list")}")
+                                )
+                            )
+                            return true
+                        }
                         Start(plugin).onCommand(sender, command, label, args)
                     } else {
                         sendArgsError()

@@ -33,3 +33,4 @@ plugin-messages:
   player-already-removed: "That player is not in the player list"
   added-all-players: "Added all online players to the player list"
   removed-all-players: "Removed all players from the player list"
+  empty-player-list: "<red><bold>Error:</bold> The player list is empty. Add players with /randomizer players add"
