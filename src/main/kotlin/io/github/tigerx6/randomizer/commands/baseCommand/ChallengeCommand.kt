@@ -143,14 +143,14 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
         } else if (challengeStatus == "end") {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.current-status-off")}")
+                    mm.deserialize("${config.getString("plugin-messages.status-off")}")
                 )
             )
             return true
         } else {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.current-status-on")}")
+                    mm.deserialize("${config.getString("plugin-messages.status-on")}")
                 )
             )
             return true
