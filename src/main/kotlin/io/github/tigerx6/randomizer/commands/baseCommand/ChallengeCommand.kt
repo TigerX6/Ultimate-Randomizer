@@ -54,12 +54,13 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             )
         }
 
-        fun sendArgsError() {
+        fun sendArgsError(): Boolean {
             sender.sendMessage(
                 prefix.append(
                     mm.deserialize("${config.getString("plugin-messages.argument-error")}")
                 )
             )
+            return true
         }
 
         // subcommands
@@ -79,7 +80,6 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                         Start(plugin).onCommand(sender, command, label, args)
                     } else {
                         sendArgsError()
-                        true
                     }
                 } else {
                     sendPermissionError()
@@ -94,7 +94,6 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                         Stop(plugin).onCommand(sender, command, label, args)
                     } else {
                         sendArgsError()
-                        true
                     }
                 } else {
                     sendPermissionError()
@@ -109,7 +108,6 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                         Shuffle(plugin, this).onCommand(sender, command, label, args)
                     } else {
                         sendArgsError()
-                        true
                     }
                 } else {
                     sendPermissionError()
@@ -145,8 +143,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                         }
                     }
                 }
-                sendArgsError()
-                return true
+                return sendArgsError()
             }
         } else if (challengeStatus == "end") {
             sender.sendMessage(
@@ -163,8 +160,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             )
             return true
         }
-        sendArgsError()
-        return true
+        return sendArgsError()
     }
 
     // Timer
