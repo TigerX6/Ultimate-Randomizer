@@ -46,12 +46,13 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             return true
         }
 
-        fun sendPermissionError() {
+        fun sendPermissionError(): Boolean {
             sender.sendMessage(
                 prefix.append(
                     mm.deserialize("${config.getString("plugin-messages.permission-error")}")
                 )
             )
+            return true
         }
 
         fun sendArgsError(): Boolean {
@@ -82,64 +83,58 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                         sendArgsError()
                     }
                 } else {
-                    sendPermissionError()
-                    return true
+                    return sendPermissionError()
                 }
             }
 
             // stop
             if (args[0] == "stop") {
-                if (sender.hasPermission("randomizer.stop")) {
-                    return if (args.size == 1) {
+                return if (sender.hasPermission("randomizer.stop")) {
+                    if (args.size == 1) {
                         Stop(plugin).onCommand(sender, command, label, args)
                     } else {
                         sendArgsError()
                     }
                 } else {
                     sendPermissionError()
-                    return true
                 }
             }
 
             // shuffle
             if (args[0] == "shuffle") {
-                if (sender.hasPermission("randomizer.shuffle")) {
-                    return if (args.size == 1) {
+                return if (sender.hasPermission("randomizer.shuffle")) {
+                    if (args.size == 1) {
                         Shuffle(plugin, this).onCommand(sender, command, label, args)
                     } else {
                         sendArgsError()
                     }
                 } else {
                     sendPermissionError()
-                    return true
                 }
             }
 
             // players
             if (args[0] == "players") {
                 if (args.size == 1) {
-                    if (sender.hasPermission("randomizer.players")) {
-                        return Players(plugin).onCommand(sender, command, label, args)
+                    return if (sender.hasPermission("randomizer.players")) {
+                        Players(plugin).onCommand(sender, command, label, args)
                     } else {
                         sendPermissionError()
-                        return true
                     }
                 }
                 if (args.size <= 3) {
                     if (args[1] == "add") {
-                        if (sender.hasPermission("randomizer.players.add")) {
-                            return PlayersAdd(plugin).onCommand(sender, command, label, args)
+                        return if (sender.hasPermission("randomizer.players.add")) {
+                            PlayersAdd(plugin).onCommand(sender, command, label, args)
                         } else {
                             sendPermissionError()
-                            return true
                         }
                     }
                     if (args[1] == "remove") {
-                        if (sender.hasPermission("randomizer.players.remove")) {
-                            return PlayersRemove(plugin).onCommand(sender, command, label, args)
+                        return if (sender.hasPermission("randomizer.players.remove")) {
+                            PlayersRemove(plugin).onCommand(sender, command, label, args)
                         } else {
                             sendPermissionError()
-                            return true
                         }
                     }
                 }
