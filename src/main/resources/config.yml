@@ -20,6 +20,8 @@ plugin-messages:
   status-on: "Randomizer is currently <bold><green>enabled"
   status-off: "Randomizer is currently <bold><red>disabled"
   randomizer-shuffled: "Randomizer has been shuffled"
+  randomizer-shuffled-mobs: "Randomizer mob drops have been shuffled"
+  randomizer-shuffled-blocks: "Randomizer block drops have been shuffled"
   permission-error: "<red><bold>Error:</bold> You don't have the required permission to use that"
   argument-error: "<red><bold>Error:</bold> Could not run with the arguments supplied."
   already-enabled: "<red><bold>Error:</bold> Randomizer is already ON"

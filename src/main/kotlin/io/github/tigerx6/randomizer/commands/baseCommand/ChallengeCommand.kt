@@ -70,15 +70,23 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             if (args[0] == "start") {
                 if (sender.hasPermission("randomizer.start")) {
                     return if (args.size == 1) {
-                        if (randomizerPlayers.isEmpty()) {
-                            sender.sendMessage(
-                                prefix.append(
-                                    mm.deserialize("${config.getString("plugin-messages.empty-player-list")}")
+                        if (challengeStatus == "end") {
+                            if (randomizerPlayers.isEmpty()) {
+                                sender.sendMessage(
+                                    prefix.append(
+                                        mm.deserialize("${config.getString("plugin-messages.empty-player-list")}")
+                                    )
                                 )
-                            )
-                            return true
+                                return true
+                            }
+                            return Start(plugin).onCommand(sender, command, label, args)
                         }
-                        Start(plugin).onCommand(sender, command, label, args)
+                        sender.sendMessage(
+                            prefix.append(
+                                mm.deserialize("${config.getString("plugin-messages.already-enabled")}")
+                            )
+                        )
+                        return true
                     } else {
                         sendArgsError()
                     }
@@ -103,7 +111,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             // shuffle
             if (args[0] == "shuffle") {
                 return if (sender.hasPermission("randomizer.shuffle")) {
-                    if (args.size == 1) {
+                    if (args.size <= 2) {
                         Shuffle(plugin, this).onCommand(sender, command, label, args)
                     } else {
                         sendArgsError()
@@ -219,6 +227,8 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
         } else if (args.size == 2) {
             if (args[0] == "players") {
                 mutableListOf("add", "remove")
+            } else if (args[0] == "shuffle") {
+                mutableListOf("mobs", "blocks")
             } else {
                 mutableListOf()
             }

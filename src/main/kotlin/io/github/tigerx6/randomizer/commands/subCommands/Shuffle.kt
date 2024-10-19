@@ -21,11 +21,42 @@ class Shuffle(plugin: Randomizer, challengeCommand: ChallengeCommand) : CommandE
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
-        blockBreakListener.shuffle()
-        mobDeathListener.shuffle()
-        Bukkit.broadcast(
-            prefix
-                .append(mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled")}"))
+        if (args.size == 2) {
+            if (args[1] == "mobs") {
+                mobDeathListener.shuffle()
+                sender.sendMessage(
+                    prefix.append(
+                        mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled-mobs")}")
+                    )
+                )
+                return true
+            }
+
+            if (args[1] == "blocks") {
+                blockBreakListener.shuffle()
+                sender.sendMessage(
+                    prefix.append(
+                        mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled-blocks")}")
+                    )
+                )
+                return true
+            }
+        }
+
+        if (args.size == 1) {
+            mobDeathListener.shuffle()
+            blockBreakListener.shuffle()
+
+            Bukkit.broadcast(
+                prefix
+                    .append(mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled")}"))
+            )
+            return true
+        }
+        sender.sendMessage(
+            prefix.append(
+                mm.deserialize("${config.getString("plugin-messages.argument-error")}")
+            )
         )
         return true
     }
