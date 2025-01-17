@@ -23,19 +23,19 @@ class BlockBreakListener(plugin: Randomizer) : Listener {
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
         if (challengeCommand.challengeStatus == "start") {
-            if (challengeCommand.randomizerPlayers.contains(event.player.name)) {
-                if (config.getBoolean("block_drops.randomize_block_drops")) {
-                    event.isDropItems = false
-                    var material = randomItemMap[event.block.type]
+            if (!challengeCommand.randomizerPlayers.contains(event.player.name) && config.getBoolean("use_player_list")) return
 
-                    if (material == null) {
-                        material = Material.entries[Random.nextInt(0, Material.entries.size)]
-                        randomItemMap[event.block.type] = material
-                    }
+            if (config.getBoolean("block_drops.randomize_block_drops")) {
+                event.isDropItems = false
+                var material = randomItemMap[event.block.type]
 
-                    val itemStack = ItemStack(material, Random.nextInt(1, config.getInt("block_drops.max_block_drops")))
-                    event.player.world.dropItemNaturally(event.block.location, itemStack)
+                if (material == null) {
+                    material = Material.entries[Random.nextInt(0, Material.entries.size)]
+                    randomItemMap[event.block.type] = material
                 }
+
+                val itemStack = ItemStack(material, Random.nextInt(1, config.getInt("block_drops.max_block_drops")))
+                event.player.world.dropItemNaturally(event.block.location, itemStack)
             }
         }
     }

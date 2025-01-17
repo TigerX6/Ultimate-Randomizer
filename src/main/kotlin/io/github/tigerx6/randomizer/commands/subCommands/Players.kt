@@ -18,6 +18,14 @@ class Players(plugin: Randomizer) : CommandExecutor {
         .append(Component.text(" "))
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+        if (!config.getBoolean("use_player_list")) {
+            sender.sendMessage(
+                prefix.append(
+                    mm.deserialize("${config.getString("plugin-messages.not-using-player-list")}")
+                )
+            )
+        }
+
         if (randomizerPlayers.isNotEmpty()) {
             sender.sendMessage(
                 prefix.append(

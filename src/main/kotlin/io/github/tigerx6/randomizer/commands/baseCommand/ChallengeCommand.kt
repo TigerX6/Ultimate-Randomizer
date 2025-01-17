@@ -70,7 +70,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             if (args[0] == "start") {
                 if (sender.hasPermission("randomizer.start")) {
                     return if (args.size == 1) {
-                        if (randomizerPlayers.isEmpty()) {
+                        if (randomizerPlayers.isEmpty() && config.getBoolean("use_player_list")) {
                             sender.sendMessage(
                                 prefix.append(
                                     mm.deserialize("${config.getString("plugin-messages.empty-player-list")}")
@@ -173,12 +173,11 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                         String.format("%02d : %02d : %02d", hours, minutes, seconds)
                     }
                     for (player in Bukkit.getOnlinePlayers()) {
-                        if (randomizerPlayers.contains(player.name)) {
-                            player.sendActionBar(
-                                mm.deserialize("<gradient:yellow:gold:1>$timerText")
-                                    .decorate(TextDecoration.BOLD)
-                            )
-                        }
+                        if (!randomizerPlayers.contains(player.name) && config.getBoolean("use_player_list")) return
+                        player.sendActionBar(
+                            mm.deserialize("<gradient:yellow:gold:1>$timerText")
+                                .decorate(TextDecoration.BOLD)
+                        )
                     }
                 }
             },

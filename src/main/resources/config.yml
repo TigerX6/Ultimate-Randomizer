@@ -11,6 +11,7 @@ mob_drops:
   max_mob_xp: 50
 
 show_timer: true
+use_player_list: false
 
 # plugin messages support Minimessage formatting. Visit https://docs.advntr.dev/minimessage/format.html for more information
 plugin-messages:
@@ -36,3 +37,4 @@ plugin-messages:
   added-all-players: "Added all online players to the player list"
   removed-all-players: "Removed all players from the player list"
   empty-player-list: "<red><bold>Error:</bold> The player list is empty. Add players with /randomizer players add"
+  not-using-player-list: "<i><bold>Note:</bold> <gray>The player list is currently not in use</gray></i>"
