@@ -89,8 +89,8 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
 
             // stop
             if (args[0] == "stop") {
-                return if (sender.hasPermission("randomizer.stop")) {
-                    if (args.size == 1) {
+                if (sender.hasPermission("randomizer.stop")) {
+                    return if (args.size == 1) {
                         Stop(plugin).onCommand(sender, command, label, args)
                     } else {
                         sendArgsError()

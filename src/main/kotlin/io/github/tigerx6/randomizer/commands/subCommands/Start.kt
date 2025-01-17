@@ -34,6 +34,7 @@ class Start(plugin: Randomizer) : CommandExecutor {
             prefix
                 .append(mm.deserialize("${config.getString("plugin-messages.randomizer-on")}"))
         )
+
         if (config.getBoolean("show_timer")) {
             challengeCommand.stopTimer()
             challengeCommand.startTimer()
