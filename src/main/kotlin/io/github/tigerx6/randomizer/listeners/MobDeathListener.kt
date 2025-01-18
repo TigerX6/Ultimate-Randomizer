@@ -1,6 +1,6 @@
 package io.github.tigerx6.randomizer.listeners
 
-import io.github.tigerx6.randomizer.main.Randomizer
+import io.github.tigerx6.randomizer.Randomizer
 import org.bukkit.Material
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Mob

@@ -1,6 +1,6 @@
 name: Randomizer
 version: '1.5.0'
-main: io.github.tigerx6.randomizer.main.Randomizer
+main: io.github.tigerx6.randomizer.Randomizer
 api-version: '1.13'
 author: TigerX6
 commands:
