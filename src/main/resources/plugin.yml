@@ -1,4 +1,4 @@
-name: Randomizer
+name: Ultimate-Randomizer
 version: '1.5.1'
 main: io.github.tigerx6.randomizer.Randomizer
 api-version: '1.13'
