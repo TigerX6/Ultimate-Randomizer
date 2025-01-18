@@ -6,3 +6,17 @@ author: TigerX6
 commands:
   randomizer:
     description: "General command for the Randomizer"
+permissions:
+  randomizer.*:
+    default: op
+    description: Gives access to all Randomizer commands
+    children:
+      randomizer.start: true
+      randomizer.stop: true
+      randomizer.shuffle: true
+      randomizer.players: true
+      randomizer.players.add: true
+      randomizer.players.remove: true
+
+  randomizer.randomizer:
+    default: true

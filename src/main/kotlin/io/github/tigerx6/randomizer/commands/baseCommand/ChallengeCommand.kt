@@ -140,7 +140,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                 }
                 return sendArgsError()
             }
-        } else if (challengeStatus == "end") {
+        } else if (challengeStatus == "end" && sender.hasPermission("randomizer.randomizer")) {
             sender.sendMessage(
                 prefix.append(
                     mm.deserialize("${config.getString("plugin-messages.status-off")}")
@@ -148,11 +148,13 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             )
             return true
         } else {
-            sender.sendMessage(
-                prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.status-on")}")
+            if (sender.hasPermission("randomizer.randomizer")) {
+                sender.sendMessage(
+                    prefix.append(
+                        mm.deserialize("${config.getString("plugin-messages.status-on")}")
+                    )
                 )
-            )
+            }
             return true
         }
         return sendArgsError()
