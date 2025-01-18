@@ -115,6 +115,13 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
 
             // players
             if (args[0] == "players") {
+                if (!config.getBoolean("use_player_list")) {
+                    sender.sendMessage(
+                        prefix.append(
+                            mm.deserialize("${config.getString("plugin-messages.not-using-player-list")}")
+                        )
+                    )
+                }
                 if (args.size == 1) {
                     return if (sender.hasPermission("randomizer.players")) {
                         Players(plugin).onCommand(sender, command, label, args)
