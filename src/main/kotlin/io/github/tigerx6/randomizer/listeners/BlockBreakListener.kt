@@ -34,7 +34,13 @@ class BlockBreakListener(plugin: Randomizer) : Listener {
                     randomItemMap[event.block.type] = material
                 }
 
-                val itemStack = ItemStack(material, Random.nextInt(1, config.getInt("block_drops.max_block_drops")))
+                val itemStack = ItemStack(
+                    material,
+                    Random.nextInt(
+                        config.getInt("block_drops.min_block_drops"),
+                        config.getInt("block_drops.max_block_drops")
+                    )
+                )
                 event.player.world.dropItemNaturally(event.block.location, itemStack)
             }
         }

@@ -35,11 +35,18 @@ class MobDeathListener(plugin: Randomizer) : Listener {
                             material = Material.entries[Random.nextInt(0, Material.entries.size)]
                             randomItemMap[it.type] = material
                         }
-                        ItemStack(material, Random.nextInt(1, 10))
+                        ItemStack(
+                            material,
+                            Random.nextInt(
+                                config.getInt("mob_drops.min_mob_drops"),
+                                config.getInt("mob_drops.max_mob_drops")
+                            )
+                        )
                     }
                 }
                 if (config.getBoolean("mob_drops.randomize_mob_xp_drops")) {
-                    event.droppedExp = Random.nextInt(1, config.getInt("mob_drops.max_mob_xp"))
+                    event.droppedExp =
+                        Random.nextInt(config.getInt("mob_drops.min_mob_xp"), config.getInt("mob_drops.max_mob_xp"))
                 }
             }
         }
