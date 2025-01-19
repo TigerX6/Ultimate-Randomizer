@@ -30,37 +30,38 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
         .append(Component.text(" "))
 
+    fun messageSender(configPath: String) {
+        messageSender(configPath)
+    }
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+        // update onlinePlayers
         onlinePlayers.clear()
         for (player in Bukkit.getOnlinePlayers()) {
             onlinePlayers.add(player.name)
         }
 
         // error handling
-        if (sender !is Player) {
+        fun messageSender(configPath: String) {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.not-player-error")}")
+                    mm.deserialize("${config.getString(configPath)}")
                 )
             )
+        }
+
+        if (sender !is Player) {
+            messageSender("plugin-messages.not-player-error")
             return true
         }
 
         fun sendPermissionError(): Boolean {
-            sender.sendMessage(
-                prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.permission-error")}")
-                )
-            )
+            messageSender("plugin-messages.permission-error")
             return true
         }
 
-        fun sendArgsError(): Boolean {
-            sender.sendMessage(
-                prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.argument-error")}")
-                )
-            )
+        fun sendArgError(): Boolean {
+            messageSender("plugin-messages.argument-error")
             return true
         }
 
@@ -71,16 +72,12 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                 if (sender.hasPermission("randomizer.start")) {
                     return if (args.size == 1) {
                         if (randomizerPlayers.isEmpty() && config.getBoolean("use_player_list")) {
-                            sender.sendMessage(
-                                prefix.append(
-                                    mm.deserialize("${config.getString("plugin-messages.empty-player-list")}")
-                                )
-                            )
+                            messageSender("plugin-messages.empty-player-list")
                             return true
                         }
                         return Start(plugin).onCommand(sender, command, label, args)
                     } else {
-                        sendArgsError()
+                        sendArgError()
                     }
                 } else {
                     return sendPermissionError()
@@ -93,7 +90,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                     return if (args.size == 1) {
                         Stop(plugin).onCommand(sender, command, label, args)
                     } else {
-                        sendArgsError()
+                        sendArgError()
                     }
                 } else {
                     sendPermissionError()
@@ -106,7 +103,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                     if (args.size <= 2) {
                         Shuffle(plugin, this).onCommand(sender, command, label, args)
                     } else {
-                        sendArgsError()
+                        sendArgError()
                     }
                 } else {
                     sendPermissionError()
@@ -116,11 +113,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             // players
             if (args[0] == "players") {
                 if (!config.getBoolean("use_player_list")) {
-                    sender.sendMessage(
-                        prefix.append(
-                            mm.deserialize("${config.getString("plugin-messages.not-using-player-list")}")
-                        )
-                    )
+                    messageSender("plugin-messages.not-using-player-list")
                 }
                 if (args.size == 1) {
                     return if (sender.hasPermission("randomizer.players")) {
@@ -130,41 +123,30 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                     }
                 }
                 if (args.size <= 3) {
-                    if (args[1] == "add") {
-                        return if (sender.hasPermission("randomizer.players.add")) {
-                            PlayersAdd(plugin).onCommand(sender, command, label, args)
-                        } else {
-                            sendPermissionError()
+                    when (args[1]) {
+                        "add" -> return when (sender.hasPermission("randomizer.players.add")) {
+                            true -> PlayersAdd(plugin).onCommand(sender, command, label, args)
+                            else -> sendPermissionError()
                         }
-                    }
-                    if (args[1] == "remove") {
-                        return if (sender.hasPermission("randomizer.players.remove")) {
-                            PlayersRemove(plugin).onCommand(sender, command, label, args)
-                        } else {
-                            sendPermissionError()
+
+                        "remove" -> return when (sender.hasPermission("randomizer.players.remove")) {
+                            true -> PlayersRemove(plugin).onCommand(sender, command, label, args)
+                            else -> sendPermissionError()
                         }
                     }
                 }
-                return sendArgsError()
+                return sendArgError()
             }
         } else if (challengeStatus == "end" && sender.hasPermission("randomizer.randomizer")) {
-            sender.sendMessage(
-                prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.status-off")}")
-                )
-            )
+            messageSender("plugin-messages.status-off")
             return true
         } else {
             if (sender.hasPermission("randomizer.randomizer")) {
-                sender.sendMessage(
-                    prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.status-on")}")
-                    )
-                )
+                messageSender("plugin-messages.status-on")
             }
             return true
         }
-        return sendArgsError()
+        return true
     }
 
     // Timer

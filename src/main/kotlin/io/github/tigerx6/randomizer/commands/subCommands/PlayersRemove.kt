@@ -34,34 +34,17 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
                         )
                     )
                 } else {
-                    sender.sendMessage(
-                        prefix.append(
-                            mm.deserialize("${config.getString("plugin-messages.player-already-removed")}")
-                        )
-                    )
+                    challengeCommand.messageSender("plugin-messages.player-already-removed")
                 }
             } else if (args[2] == "@a") {
                 challengeCommand.randomizerPlayers.clear()
-                sender.sendMessage(
-                    prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.removed-all-players")}")
-                    )
-                )
+                challengeCommand.messageSender("plugin-messages.removed-all-players")
             } else {
-                sender.sendMessage(
-                    prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.argument-error")}")
-                    )
-                )
+                challengeCommand.messageSender("plugin-messages.argument-error")
             }
         } else {
-            sender.sendMessage(
-                prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.argument-error")}")
-                )
-            )
+            challengeCommand.messageSender("plugin-messages.argument-error")
         }
-
         return true
     }
 }

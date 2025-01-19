@@ -24,7 +24,7 @@ class Shuffle(plugin: Randomizer, challengeCommand: ChallengeCommand) : CommandE
         if (args.size == 2) {
             if (args[1] == "mobs") {
                 mobDeathListener.shuffle()
-                sender.sendMessage(
+                Bukkit.broadcast(
                     prefix.append(
                         mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled-mobs")}")
                     )
@@ -34,7 +34,7 @@ class Shuffle(plugin: Randomizer, challengeCommand: ChallengeCommand) : CommandE
 
             if (args[1] == "blocks") {
                 blockBreakListener.shuffle()
-                sender.sendMessage(
+                Bukkit.broadcast(
                     prefix.append(
                         mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled-blocks")}")
                     )
