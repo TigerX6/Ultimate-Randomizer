@@ -34,19 +34,35 @@ class PlayersAdd(plugin: Randomizer) : CommandExecutor {
                         )
                     )
                 } else {
-                    challengeCommand.messageSender("plugin-messages.player-already-added")
+                    sender.sendMessage(
+                        prefix.append(
+                            mm.deserialize("${config.getString("plugin-messages.player-already-added")}")
+                        )
+                    )
                 }
             } else if (args[2] == "@a") {
                 challengeCommand.randomizerPlayers.clear()
                 for (player in onlinePlayers) {
                     challengeCommand.randomizerPlayers.add(player)
                 }
-                challengeCommand.messageSender("plugin-messages.added-all-players")
+                sender.sendMessage(
+                    prefix.append(
+                        mm.deserialize("${config.getString("plugin-messages.added-all-players")}")
+                    )
+                )
             } else {
-                challengeCommand.messageSender("plugin-messages.argument-error")
+                sender.sendMessage(
+                    prefix.append(
+                        mm.deserialize("${config.getString("plugin-messages.argument-error")}")
+                    )
+                )
             }
         } else {
-            challengeCommand.messageSender("plugin-messages.argument-error")
+            sender.sendMessage(
+                prefix.append(
+                    mm.deserialize("${config.getString("plugin-messages.argument-error")}")
+                )
+            )
         }
         return true
     }

@@ -21,7 +21,11 @@ class Start(plugin: Randomizer) : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
         if (challengeStatus == "start") {
-            challengeCommand.messageSender("plugin-messages.already-enabled")
+            sender.sendMessage(
+                prefix.append(
+                    mm.deserialize("${config.getString("plugin-messages.already-enabled")}")
+                )
+            )
             return true
         }
 

@@ -30,7 +30,11 @@ class Players(plugin: Randomizer) : CommandExecutor {
                 )
             )
         } else {
-            challengeCommand.messageSender("plugin-messages.no-current-players")
+            sender.sendMessage(
+                prefix.append(
+                    mm.deserialize("${config.getString("plugin-messages.no-current-players")}")
+                )
+            )
         }
         return true
     }

@@ -10,7 +10,6 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
 import org.bukkit.configuration.file.FileConfiguration
-import org.bukkit.entity.Player
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
@@ -30,10 +29,6 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
         .append(Component.text(" "))
 
-    fun messageSender(configPath: String) {
-        messageSender(configPath)
-    }
-
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         // update onlinePlayers
         onlinePlayers.clear()
@@ -41,7 +36,6 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             onlinePlayers.add(player.name)
         }
 
-        // error handling
         fun messageSender(configPath: String) {
             sender.sendMessage(
                 prefix.append(
