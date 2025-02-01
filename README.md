@@ -36,7 +36,7 @@ Then challenge yourself or your friends to beat the Ender Dragon with Ultimate R
 [GitHub Issues]: https://img.shields.io/github/issues/TigerX6/Ultimate-Randomizer
 
 # Upcoming Features
-<a href="https://github.com/TigerX6/Ultimate-Randomizer/discussions/categories/feature-ideas" target="_blank">Suggest a new feature</a>
+[Suggest a new feature](https://github.com/TigerX6/Ultimate-Randomizer/discussions/categories/feature-ideas)
 
 - timer formatting options
 - shuffle mob and block drops individually
