@@ -1,25 +1,26 @@
-# Ultimate Randomizer - Minecraft randomizer plugin
+# Bored of normal Minecraft?
 
-### Challenge yourself or your friends to beat the Ender Dragon with Ultimate Randomizer! Ultimate Randomizer is a simple yet highly configurable Minecraft plugin that randomizes block and Mob drops.
+Then challenge yourself or your friends to beat the Ender Dragon with Ultimate Randomizer! Ultimate Randomizer is a simple Minecraft plugin that randomizes block and Mob drops, while being highly configurable.
 
 
+# Features
 
-## Features
 - every block drops a new random item. Some blocks could drop the same item, while others could drop nothing. The dropped amount can be configured in the config
-- mobs drop random items as well! The drop chance stays the same and mobs that normally drop multiple items will still do that
-- mobs drop a random amount of experience, also configurable in the config
-- a timer starts when you use `/randomizer start`. This can be disabled in the config (enabled by default)
+- mobs drop random items as well! Drop chances stay the same for each mob
+- mobs also drop a random amount of experience, configurable in the config
+- a timer starts when you start the randomizer. This can be disabled in the config
 - customize and translate the plugin messages
 - a shuffle command to re-randomize all block and mob drops
-- only players that are added to the player list will be affected by the randomizer
-  
+- a player list so that only specific players are affected by the randomizer (disabled by default in the config)
+
 # Commands
 
 | Command                 | Permission             | Description             
 |-------------------------|------------------------|-------------------------
-| /randomizer             | no permission          | displays the randomizer's current status |
-| /randomizer **start**   | `randomizer.start`     | enables the randomizer |
-| /randomizer **stop**    | `randomizer.stop`      | disables the randomizer |
+|              | `randomizer.*`| gives access to all randomizer commands
+| /randomizer             | `randomizer.randomizer`     | displays the randomizer's current status
+| /randomizer **start**   | `randomizer.start`     | enables the randomizer  
+| /randomizer **stop**    | `randomizer.stop`      | disables the randomizer 
 | /randomizer **shuffle** | `randomizer.shuffle`   | shuffles the randomizer |
 | /randomizer **players** | `randomizer.players`   | displays the current player list |
 | /randomizer **players add** \<player>  |`randomizer.players.add` | adds the given player to the player list |
@@ -34,9 +35,12 @@
 
 [GitHub Issues]: https://img.shields.io/github/issues/TigerX6/Ultimate-Randomizer
 
-## Upcoming Features
+# Upcoming Features
+<a href="https://github.com/TigerX6/Ultimate-Randomizer/discussions/categories/feature-ideas" target="_blank">Suggest a new feature</a>
+
 - timer formatting options
 - shuffle mob and block drops individually
 - world list
 - randomized chest loot
 - settings GUI to edit config options in-game
+- restoring the player list and random pairs after restarts
