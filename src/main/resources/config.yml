@@ -33,7 +33,6 @@ plugin-messages:
   randomizer-shuffled-blocks: "Randomizer block drops have been shuffled"
   permission-error: "<red><bold>Error:</bold> You don't have the required permission to use that"
   argument-error: "<red><bold>Error:</bold> Could not run with the given arguments"
-  not-player-error: "<red><bold>Error:</bold> Only players can execute that command"
   current-players: "Current players:"
   no-current-players: "There are currently no players"
   added-player: "Added <player> to the player list"
