@@ -15,16 +15,16 @@ Then challenge yourself or your friends to beat the Ender Dragon with Ultimate R
 
 # Commands
 
-| Command                 | Permission             | Description             
-|-------------------------|------------------------|-------------------------
-|              | `randomizer.*`| gives access to all randomizer commands
-| /randomizer             | `randomizer.randomizer`     | displays the randomizer's current status
-| /randomizer **start**   | `randomizer.start`     | enables the randomizer  
-| /randomizer **stop**    | `randomizer.stop`      | disables the randomizer 
-| /randomizer **shuffle** | `randomizer.shuffle`   | shuffles the randomizer |
-| /randomizer **players** | `randomizer.players`   | displays the current player list |
-| /randomizer **players add** \<player>  |`randomizer.players.add` | adds the given player to the player list |
-| /randomizer **players remove** \<player>  |`randomizer.players.remove` | removes the given player from the player list |
+| Command                                  | Permission                  | Description                                   |
+|------------------------------------------|-----------------------------|-----------------------------------------------|
+|                                          | `randomizer.*`              | gives access to all randomizer commands       |
+| /randomizer                              | `randomizer.randomizer`     | displays the randomizer's current status      |
+| /randomizer **start**                    | `randomizer.start`          | enables the randomizer                        |
+| /randomizer **stop**                     | `randomizer.stop`           | disables the randomizer                       |
+| /randomizer **shuffle**                  | `randomizer.shuffle`        | shuffles the randomizer                       |
+| /randomizer **players**                  | `randomizer.players`        | displays the current player list              |
+| /randomizer **players add** \<player>    | `randomizer.players.add`    | adds the given player to the player list      |
+| /randomizer **players remove** \<player> | `randomizer.players.remove` | removes the given player from the player list |
 
 ## Links
 [![GitHub Issues]](https://github.com/TigerX6/Ultimate-Randomizer/issues)
