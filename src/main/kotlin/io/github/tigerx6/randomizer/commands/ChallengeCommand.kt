@@ -126,6 +126,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                 }
                 return sendArgError()
             }
+            sendArgError()
         } else if (challengeStatus == "end" && sender.hasPermission("randomizer.randomizer")) {
             messageSender("plugin-messages.status-off")
             return true
