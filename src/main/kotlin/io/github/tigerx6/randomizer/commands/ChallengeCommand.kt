@@ -44,11 +44,6 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
             )
         }
 
-        if (sender !is Player) {
-            messageSender("plugin-messages.not-player-error")
-            return true
-        }
-
         fun sendPermissionError(): Boolean {
             messageSender("plugin-messages.permission-error")
             return true
