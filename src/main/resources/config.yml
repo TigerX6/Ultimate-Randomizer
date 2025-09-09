@@ -18,11 +18,16 @@ mob_drops:
 
 show_timer: true
 use_player_list: false
+auto-shuffle: false
+# whether the randomizer should automatically shuffle when started
+save-random-pairs: true
+# whether the generated random pairs should be saved. If false, a block will drop a different random item each time it is broken
 
 # plugin messages support Minimessage formatting. Visit https://docs.advntr.dev/minimessage/format.html for more information
 plugin-messages:
   prefix: "[<rainbow>Randomizer</rainbow>]"
   randomizer-on: "Randomizer is now <bold><green>enabled"
+  randomizer-on-shuffle: "Randomizer is now <bold><green>enabled<reset> and shuffled"
   randomizer-off: "Randomizer is now <bold><red>disabled"
   already-enabled: "<red><bold>Error:</bold> Randomizer is already ON"
   already-disabled: "<red><bold>Error:</bold> Randomizer is already OFF"

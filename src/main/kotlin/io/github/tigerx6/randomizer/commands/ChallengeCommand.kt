@@ -64,7 +64,7 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                             messageSender("plugin-messages.empty-player-list")
                             return true
                         }
-                        return Start(plugin).onCommand(sender, command, label, args)
+                        return Start(plugin, this).onCommand(sender, command, label, args)
                     } else {
                         sendArgError()
                     }
