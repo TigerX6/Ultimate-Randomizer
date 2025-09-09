@@ -27,10 +27,7 @@ class PlayersAdd(plugin: Randomizer) : CommandExecutor {
                     challengeCommand.randomizerPlayers.add(args[2])
                     sender.sendMessage(
                         prefix.append(
-                            mm.deserialize(
-                                "${config.getString("plugin-messages.added-player")}",
-                                Placeholder.component("player", Component.text(args[2], NamedTextColor.GOLD))
-                            )
+                            mm.deserialize("${config.getString("plugin-messages.added-player")}", Placeholder.component("player", Component.text(args[2], NamedTextColor.GOLD)))
                         )
                     )
                 } else {

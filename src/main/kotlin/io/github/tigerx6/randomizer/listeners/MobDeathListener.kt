@@ -32,8 +32,13 @@ class MobDeathListener(plugin: Randomizer) : Listener {
                     event.drops.replaceAll {
                         var material = randomItemMap[it.type]
                         if (material == null) {
-                            material = Material.entries[Random.nextInt(0, Material.entries.size)]
-                            randomItemMap[it.type] = material
+                            do {
+                                material = Material.entries[Random.nextInt(0, Material.entries.size)]
+                            } while (!material!!.isItem)
+
+                            if (config.getBoolean("save-random-pairs")) {
+                                randomItemMap[it.type] = material
+                            }
                         }
                         ItemStack(
                             material,
@@ -44,6 +49,7 @@ class MobDeathListener(plugin: Randomizer) : Listener {
                         )
                     }
                 }
+
                 if (config.getBoolean("mob_drops.randomize_mob_xp_drops")) {
                     event.droppedExp =
                         Random.nextInt(config.getInt("mob_drops.min_mob_xp"), config.getInt("mob_drops.max_mob_xp"))

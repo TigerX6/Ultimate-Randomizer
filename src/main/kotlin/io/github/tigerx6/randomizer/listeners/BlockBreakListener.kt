@@ -30,8 +30,13 @@ class BlockBreakListener(plugin: Randomizer) : Listener {
                 var material = randomItemMap[event.block.type]
 
                 if (material == null) {
-                    material = Material.entries[Random.nextInt(0, Material.entries.size)]
-                    randomItemMap[event.block.type] = material
+                    do {
+                        material = Material.entries[Random.nextInt(0, Material.entries.size)]
+                    } while (!material!!.isItem)
+
+                    if (config.getBoolean("save-random-pairs")) {
+                        randomItemMap[event.block.type] = material
+                    }
                 }
 
                 val itemStack = ItemStack(
