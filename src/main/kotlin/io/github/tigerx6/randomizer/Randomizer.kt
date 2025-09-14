@@ -3,6 +3,7 @@ package io.github.tigerx6.randomizer
 import io.github.tigerx6.randomizer.commands.ChallengeCommand
 import io.github.tigerx6.randomizer.listeners.BlockBreakListener
 import io.github.tigerx6.randomizer.listeners.MobDeathListener
+import org.bstats.bukkit.Metrics
 import org.bukkit.plugin.java.JavaPlugin
 
 class Randomizer : JavaPlugin() {
@@ -11,6 +12,7 @@ class Randomizer : JavaPlugin() {
         registerEvents()
         registerCommands()
         saveDefaultConfig()
+        setupMetrics()
         logger.info("Registered listeners, commands, config")
     }
 
@@ -34,5 +36,9 @@ class Randomizer : JavaPlugin() {
         blockBreakListener.challengeCommand = challengeCommand
 
         getCommand("randomizer")?.setExecutor(challengeCommand)
+    }
+
+    private fun setupMetrics() {
+        Metrics(this, 27261)
     }
 }
