@@ -43,3 +43,9 @@ tasks.processResources {
         expand(props)
     }
 }
+
+tasks.shadowJar {
+    minimize {
+        relocate("org.bstats", "io.github.tigerx6.metrics")
+    }
+}
