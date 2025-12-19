@@ -22,6 +22,8 @@ auto-shuffle: false
 # whether the randomizer should automatically shuffle when started
 save-random-pairs: true
 # whether the generated random pairs should be saved. If false, a block will drop a different random item each time it is broken
+creative-drops: true
+# whether players in creative mode are affected by the randomizer
 
 # plugin messages support Minimessage formatting. Visit https://docs.advntr.dev/minimessage/format.html for more information
 plugin-messages:

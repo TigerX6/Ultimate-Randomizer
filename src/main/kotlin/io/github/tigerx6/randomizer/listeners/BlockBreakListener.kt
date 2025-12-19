@@ -1,6 +1,7 @@
 package io.github.tigerx6.randomizer.listeners
 
 import io.github.tigerx6.randomizer.Randomizer
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -24,6 +25,7 @@ class BlockBreakListener(plugin: Randomizer) : Listener {
     fun onBlockBreak(event: BlockBreakEvent) {
         if (challengeCommand.challengeStatus == "start") {
             if (!challengeCommand.randomizerPlayers.contains(event.player.name) && config.getBoolean("use_player_list")) return
+            if (event.player.gameMode == GameMode.CREATIVE && !config.getBoolean("creative-drops")) return
 
             if (config.getBoolean("block_drops.randomize_block_drops")) {
                 event.isDropItems = false

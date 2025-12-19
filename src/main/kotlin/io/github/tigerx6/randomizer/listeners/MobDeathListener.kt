@@ -1,6 +1,7 @@
 package io.github.tigerx6.randomizer.listeners
 
 import io.github.tigerx6.randomizer.Randomizer
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Mob
@@ -26,6 +27,7 @@ class MobDeathListener(plugin: Randomizer) : Listener {
     fun onEntityDeath(event: EntityDeathEvent) {
         if (challengeCommand.challengeStatus == "start") {
             if (!challengeCommand.randomizerPlayers.contains(event.entity.killer?.name) && config.getBoolean("use_player_list")) return
+            if (event.entity.killer?.gameMode == GameMode.CREATIVE && config.getBoolean("creative-drops")) return
 
             if (event.entity is Mob) {
                 if (config.getBoolean("mob_drops.randomize_mob_drops")) {
