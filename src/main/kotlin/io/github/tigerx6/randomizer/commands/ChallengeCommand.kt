@@ -3,7 +3,6 @@ package io.github.tigerx6.randomizer.commands
 import io.github.tigerx6.randomizer.commands.subCommands.*
 import io.github.tigerx6.randomizer.Randomizer
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -27,7 +26,6 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
-        .append(Component.text(" "))
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         // update onlinePlayers
@@ -154,10 +152,9 @@ class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
                         String.format("%02d : %02d : %02d", hours, minutes, seconds)
                     }
                     for (player in Bukkit.getOnlinePlayers()) {
-                        if (!randomizerPlayers.contains(player.name) && config.getBoolean("use_player_list")) return
+                        if (!randomizerPlayers.contains(player.name) && config.getBoolean("use_player_list")) continue
                         player.sendActionBar(
-                            mm.deserialize("<gradient:yellow:gold:1>$timerText")
-                                .decorate(TextDecoration.BOLD)
+                            mm.deserialize("<b><gradient:yellow:gold:1>$timerText")
                         )
                     }
                 }

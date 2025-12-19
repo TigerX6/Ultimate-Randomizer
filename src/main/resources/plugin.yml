@@ -5,7 +5,8 @@ api-version: '1.13'
 author: TigerX6
 commands:
   randomizer:
-    description: "General command for the Randomizer"
+    description: "General command for Ultimate Randomizer"
+    usage: "/randomizer [start|stop|shuffle|players]"
     aliases: [rm]
     permission: randomizer.*
 permissions:

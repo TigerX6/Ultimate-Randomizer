@@ -1,6 +1,6 @@
 block_drops:
   randomize_block_drops: true
-  # a random number between 1 and max_block_drops will determine the amount of items dropped:
+  # a random number between min_block_drops and max_block_drops will determine the amount of items dropped:
   # WARNING: very high max values may result in very high amounts of items causing lag
   min_block_drops: 1
   max_block_drops: 10
@@ -21,13 +21,13 @@ use_player_list: false
 auto-shuffle: false
 # whether the randomizer should automatically shuffle when started
 save-random-pairs: true
-# whether the generated random pairs should be saved. If false, a block will drop a different random item each time it is broken
+# whether the generated random pairs should be saved. When false, a block will drop a different random item each time it is broken
 creative-drops: true
 # whether players in creative mode are affected by the randomizer
 
 # plugin messages support Minimessage formatting. Visit https://docs.advntr.dev/minimessage/format.html for more information
 plugin-messages:
-  prefix: "[<rainbow>Randomizer</rainbow>]"
+  prefix: "[<rainbow>Randomizer</rainbow>] "
   randomizer-on: "Randomizer is now <bold><green>enabled"
   randomizer-on-shuffle: "Randomizer is now <bold><green>enabled<reset> and shuffled"
   randomizer-off: "Randomizer is now <bold><red>disabled"
@@ -38,8 +38,8 @@ plugin-messages:
   randomizer-shuffled: "Randomizer has been shuffled"
   randomizer-shuffled-mobs: "Randomizer mob drops have been shuffled"
   randomizer-shuffled-blocks: "Randomizer block drops have been shuffled"
-  permission-error: "<red><bold>Error:</bold> You don't have the required permission to use that"
-  argument-error: "<red><bold>Error:</bold> Could not run with the given arguments"
+  permission-error: "<red><bold>Error:</bold> You don't have the required permissions to use that"
+  argument-error: "<red><bold>Error:</bold> Invalid command"
   current-players: "Current players:"
   no-current-players: "There are currently no players"
   added-player: "Added <player> to the player list"
@@ -49,4 +49,4 @@ plugin-messages:
   added-all-players: "Added all online players to the player list"
   removed-all-players: "Removed all players from the player list"
   empty-player-list: "<red><bold>Error:</bold> The player list is empty. Add players with <gray>/randomizer players add</gray>"
-  not-using-player-list: "<i><bold>Note:</bold> <gray>The player list is currently not in use</gray></i>"
+  not-using-player-list: "<i><bold>Note:</bold> <gray>The player list is disabled. It can be enabled in the config</gray></i>"
