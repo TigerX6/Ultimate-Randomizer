@@ -1,6 +1,5 @@
 package io.github.tigerx6.randomizer
 
-import io.github.tigerx6.randomizer.commands.ChallengeCommand
 import io.github.tigerx6.randomizer.commands.RandomizerCommand
 import io.github.tigerx6.randomizer.listeners.BlockBreakListener
 import io.github.tigerx6.randomizer.listeners.MobDeathListener
