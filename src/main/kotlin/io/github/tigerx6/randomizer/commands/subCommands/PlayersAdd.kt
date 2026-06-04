@@ -12,9 +12,9 @@ import org.bukkit.configuration.file.FileConfiguration
 
 class PlayersAdd(plugin: Randomizer) : CommandExecutor {
 
-    private val challengeCommand = plugin.challengeCommand
-    private val randomizerPlayers = challengeCommand.randomizerPlayers
-    private val onlinePlayers = challengeCommand.onlinePlayers
+    private val randomizerCommand = plugin.randomizerCommand
+    private val randomizerPlayers = randomizerCommand.randomizerPlayers
+    private val onlinePlayers = randomizerCommand.onlinePlayers
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
@@ -23,10 +23,13 @@ class PlayersAdd(plugin: Randomizer) : CommandExecutor {
         if (args.size == 3) {
             if (args[2] in onlinePlayers) {
                 if (args[2] !in randomizerPlayers) {
-                    challengeCommand.randomizerPlayers.add(args[2])
+                    randomizerCommand.randomizerPlayers.add(args[2])
                     sender.sendMessage(
                         prefix.append(
-                            mm.deserialize("${config.getString("plugin-messages.added-player")}", Placeholder.component("player", Component.text(args[2], NamedTextColor.GOLD)))
+                            mm.deserialize(
+                                "${config.getString("plugin-messages.added-player")}",
+                                Placeholder.component("player", Component.text(args[2], NamedTextColor.GOLD))
+                            )
                         )
                     )
                 } else {
@@ -37,9 +40,9 @@ class PlayersAdd(plugin: Randomizer) : CommandExecutor {
                     )
                 }
             } else if (args[2] == "@a") {
-                challengeCommand.randomizerPlayers.clear()
+                randomizerCommand.randomizerPlayers.clear()
                 for (player in onlinePlayers) {
-                    challengeCommand.randomizerPlayers.add(player)
+                    randomizerCommand.randomizerPlayers.add(player)
                 }
                 sender.sendMessage(
                     prefix.append(

@@ -14,7 +14,7 @@ import kotlin.random.Random
 
 class MobDeathListener(plugin: Randomizer) : Listener {
 
-    var challengeCommand = plugin.challengeCommand
+    var randomizerCommand = plugin.randomizerCommand
 
     private val randomItemMap: MutableMap<Material, Material> = mutableMapOf()
     private val config: FileConfiguration = plugin.config
@@ -25,8 +25,8 @@ class MobDeathListener(plugin: Randomizer) : Listener {
 
     @EventHandler
     fun onEntityDeath(event: EntityDeathEvent) {
-        if (challengeCommand.challengeStatus == "start") {
-            if (!challengeCommand.randomizerPlayers.contains(event.entity.killer?.name) && config.getBoolean("use_player_list")) return
+        if (randomizerCommand.challengeStatus == "start") {
+            if (!randomizerCommand.randomizerPlayers.contains(event.entity.killer?.name) && config.getBoolean("use_player_list")) return
             if (event.entity.killer?.gameMode == GameMode.CREATIVE && config.getBoolean("creative-drops")) return
 
             if (event.entity is Mob) {

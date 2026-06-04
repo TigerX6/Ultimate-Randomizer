@@ -16,7 +16,7 @@ import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.seconds
 
-class ChallengeCommand(private val plugin: Randomizer) : TabExecutor {
+class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
 
     val mobDeathListener = plugin.mobDeathListener
     val blockBreakListener = plugin.blockBreakListener

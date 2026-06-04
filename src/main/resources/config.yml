@@ -1,31 +1,30 @@
 block_drops:
   randomize_block_drops: true
-  # a random number between min_block_drops and max_block_drops will determine the amount of items dropped:
-  # WARNING: very high max values may result in very high amounts of items causing lag
   min_block_drops: 1
   max_block_drops: 10
+  # a random number between min_block_drops and max_block_drops will determine the amount of items dropped
 
 mob_drops:
   randomize_mob_drops: true
   randomize_mob_xp_drops: true
-  # a random number between min_mob_drops and max_mob_drops will determine the amount of items dropped:
-  # WARNING: very high max values may result in very high amounts of items causing lag
+
   min_mob_drops: 1
   max_mob_drops: 10
-  # a random number between min_mob_xp and max_mob_xp will determine the amount of xp dropped:
+  # a random number between min_mob_drops and max_mob_drops will determine the amount of items dropped
   min_mob_xp: 1
   max_mob_xp: 50
+  # a random number between min_mob_xp and max_mob_xp will determine the amount of xp dropped
 
 show_timer: true
 use_player_list: false
 auto-shuffle: false
-# whether the randomizer should automatically shuffle when started
+# when true, the randomizer will automatically shuffle when started
 save-random-pairs: true
-# whether the generated random pairs should be saved. When false, a block will drop a different random item each time it is broken
+# when true, the generated random pairs will be saved. When false, a block will drop a different item each time it is broken
 creative-drops: true
-# whether players in creative mode are affected by the randomizer
+# when true, players in creative mode are affected by the randomizer
 
-# plugin messages support Minimessage formatting. Visit https://docs.advntr.dev/minimessage/format.html for more information
+# plugin messages support Minimessage formatting -> https://docs.advntr.dev/minimessage/format.html
 plugin-messages:
   prefix: "[<rainbow>Randomizer</rainbow>] "
   randomizer-on: "Randomizer is now <bold><green>enabled"

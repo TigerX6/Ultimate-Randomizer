@@ -1,7 +1,7 @@
 package io.github.tigerx6.randomizer.commands.subCommands
 
 import io.github.tigerx6.randomizer.Randomizer
-import io.github.tigerx6.randomizer.commands.ChallengeCommand
+import io.github.tigerx6.randomizer.commands.RandomizerCommand
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
@@ -10,11 +10,11 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.configuration.file.FileConfiguration
 
-class Start(plugin: Randomizer, private val challengeCommand: ChallengeCommand) : CommandExecutor {
+class Start(plugin: Randomizer, private val randomizerCommand: RandomizerCommand) : CommandExecutor {
 
-    private var challengeStatus = challengeCommand.challengeStatus
-    private val blockBreakListener = challengeCommand.blockBreakListener
-    private val mobDeathListener = challengeCommand.mobDeathListener
+    private var challengeStatus = randomizerCommand.challengeStatus
+    private val blockBreakListener = randomizerCommand.blockBreakListener
+    private val mobDeathListener = randomizerCommand.mobDeathListener
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
@@ -30,7 +30,7 @@ class Start(plugin: Randomizer, private val challengeCommand: ChallengeCommand) 
             return true
         }
 
-        challengeCommand.challengeStatus = "start"
+        randomizerCommand.challengeStatus = "start"
         if (config.getBoolean("auto-shuffle")) {
             blockBreakListener.shuffle()
             mobDeathListener.shuffle()
@@ -43,8 +43,8 @@ class Start(plugin: Randomizer, private val challengeCommand: ChallengeCommand) 
         }
 
         if (config.getBoolean("show_timer")) {
-            challengeCommand.stopTimer()
-            challengeCommand.startTimer()
+            randomizerCommand.stopTimer()
+            randomizerCommand.startTimer()
         }
         return true
     }

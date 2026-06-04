@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 class BlockBreakListener(plugin: Randomizer) : Listener {
 
-    var challengeCommand = plugin.challengeCommand
+    var randomizerCommand = plugin.randomizerCommand
 
     private val randomItemMap: MutableMap<Material, Material> = mutableMapOf()
     private val config = plugin.config
@@ -23,8 +23,8 @@ class BlockBreakListener(plugin: Randomizer) : Listener {
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        if (challengeCommand.challengeStatus == "start") {
-            if (!challengeCommand.randomizerPlayers.contains(event.player.name) && config.getBoolean("use_player_list")) return
+        if (randomizerCommand.challengeStatus == "start") {
+            if (!randomizerCommand.randomizerPlayers.contains(event.player.name) && config.getBoolean("use_player_list")) return
             if (event.player.gameMode == GameMode.CREATIVE && !config.getBoolean("creative-drops")) return
 
             if (config.getBoolean("block_drops.randomize_block_drops")) {

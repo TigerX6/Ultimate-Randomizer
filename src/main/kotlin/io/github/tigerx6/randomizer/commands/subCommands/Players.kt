@@ -10,8 +10,8 @@ import org.bukkit.configuration.file.FileConfiguration
 
 class Players(plugin: Randomizer) : CommandExecutor {
 
-    private val challengeCommand = plugin.challengeCommand
-    private val randomizerPlayers = challengeCommand.randomizerPlayers
+    private val randomizerCommand = plugin.randomizerCommand
+    private val randomizerPlayers = randomizerCommand.randomizerPlayers
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")

@@ -11,8 +11,8 @@ import org.bukkit.configuration.file.FileConfiguration
 
 class Stop(plugin: Randomizer) : CommandExecutor {
 
-    private val challengeCommand = plugin.challengeCommand
-    private var challengeStatus = challengeCommand.challengeStatus
+    private val randomizerCommand = plugin.randomizerCommand
+    private var challengeStatus = randomizerCommand.challengeStatus
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
@@ -28,14 +28,14 @@ class Stop(plugin: Randomizer) : CommandExecutor {
             return true
         }
 
-        challengeCommand.challengeStatus = "end"
+        randomizerCommand.challengeStatus = "end"
         Bukkit.broadcast(
             prefix
                 .append(mm.deserialize("${config.getString("plugin-messages.randomizer-off")}"))
         )
 
         if (config.getBoolean("show_timer")) {
-            challengeCommand.stopTimer()
+            randomizerCommand.stopTimer()
         }
         return true
     }

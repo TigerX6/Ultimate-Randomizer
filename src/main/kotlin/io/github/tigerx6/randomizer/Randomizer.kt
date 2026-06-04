@@ -1,6 +1,7 @@
 package io.github.tigerx6.randomizer
 
 import io.github.tigerx6.randomizer.commands.ChallengeCommand
+import io.github.tigerx6.randomizer.commands.RandomizerCommand
 import io.github.tigerx6.randomizer.listeners.BlockBreakListener
 import io.github.tigerx6.randomizer.listeners.MobDeathListener
 import org.bstats.bukkit.Metrics
@@ -22,7 +23,7 @@ class Randomizer : JavaPlugin() {
 
     val mobDeathListener = MobDeathListener(this)
     val blockBreakListener = BlockBreakListener(this)
-    var challengeCommand = ChallengeCommand(this)
+    var randomizerCommand = RandomizerCommand(this)
 
 
     private fun registerEvents() {
@@ -32,10 +33,10 @@ class Randomizer : JavaPlugin() {
 
     private fun registerCommands() {
         // fix for circular references
-        mobDeathListener.challengeCommand = challengeCommand
-        blockBreakListener.challengeCommand = challengeCommand
+        mobDeathListener.randomizerCommand = randomizerCommand
+        blockBreakListener.randomizerCommand = randomizerCommand
 
-        getCommand("randomizer")?.setExecutor(challengeCommand)
+        getCommand("randomizer")?.setExecutor(randomizerCommand)
     }
 
     private fun setupMetrics() {

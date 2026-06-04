@@ -12,9 +12,9 @@ import org.bukkit.configuration.file.FileConfiguration
 
 class PlayersRemove(plugin: Randomizer) : CommandExecutor {
 
-    private val challengeCommand = plugin.challengeCommand
-    private val randomizerPlayers = challengeCommand.randomizerPlayers
-    private val onlinePlayers = challengeCommand.onlinePlayers
+    private val randomizerCommand = plugin.randomizerCommand
+    private val randomizerPlayers = randomizerCommand.randomizerPlayers
+    private val onlinePlayers = randomizerCommand.onlinePlayers
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
@@ -23,7 +23,7 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
         if (args.size == 3) {
             if (args[2] in onlinePlayers) {
                 if (args[2] in randomizerPlayers) {
-                    challengeCommand.randomizerPlayers.remove(args[2])
+                    randomizerCommand.randomizerPlayers.remove(args[2])
                     sender.sendMessage(
                         prefix.append(
                             mm.deserialize(
@@ -40,7 +40,7 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
                     )
                 }
             } else if (args[2] == "@a") {
-                challengeCommand.randomizerPlayers.clear()
+                randomizerCommand.randomizerPlayers.clear()
                 sender.sendMessage(
                     prefix.append(
                         mm.deserialize("${config.getString("plugin-messages.removed-all-players")}")
