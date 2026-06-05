@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm") version "2.2.20-RC"
+    kotlin("jvm") version "2.2.20"
     id("com.gradleup.shadow") version "8.3.0"
-    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("xyz.jpenilla.run-paper") version "3.0.2"
 }
 
 group = "io.github.tigerx6"
@@ -21,31 +21,29 @@ dependencies {
 }
 
 tasks {
+    processResources {
+        val props = mapOf("version" to version)
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("plugin.yml") {
+            expand(props)
+        }
+    }
+
+    shadowJar {
+        relocate("org.bstats", "io.github.tigerx6.metrics")
+
+    }
+
+    build {
+        dependsOn("shadowJar")
+    }
+
     runServer {
         minecraftVersion("1.21.4")
     }
 }
 
-val targetJavaVersion = 21
 kotlin {
-    jvmToolchain(targetJavaVersion)
-}
-
-tasks.build {
-    dependsOn("shadowJar")
-}
-
-tasks.processResources {
-    val props = mapOf("version" to version)
-    inputs.properties(props)
-    filteringCharset = "UTF-8"
-    filesMatching("plugin.yml") {
-        expand(props)
-    }
-}
-
-tasks.shadowJar {
-    minimize {
-        relocate("org.bstats", "io.github.tigerx6.metrics")
-    }
+    jvmToolchain(21)
 }
