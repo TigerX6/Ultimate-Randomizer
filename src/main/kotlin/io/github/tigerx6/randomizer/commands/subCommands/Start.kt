@@ -12,7 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration
 
 class Start(plugin: Randomizer, private val randomizerCommand: RandomizerCommand) : CommandExecutor {
 
-    private var challengeStatus = randomizerCommand.challengeStatus
+    private var randomizerStatus = randomizerCommand.randomizerStatus
     private val blockBreakListener = randomizerCommand.blockBreakListener
     private val mobDeathListener = randomizerCommand.mobDeathListener
     private val config: FileConfiguration = plugin.config
@@ -21,7 +21,7 @@ class Start(plugin: Randomizer, private val randomizerCommand: RandomizerCommand
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
-        if (challengeStatus == "start") {
+        if (randomizerStatus == "start") {
             sender.sendMessage(
                 prefix.append(
                     mm.deserialize("${config.getString("plugin-messages.already-enabled")}")
@@ -30,7 +30,7 @@ class Start(plugin: Randomizer, private val randomizerCommand: RandomizerCommand
             return true
         }
 
-        randomizerCommand.challengeStatus = "start"
+        randomizerCommand.randomizerStatus = "start"
         if (config.getBoolean("auto-shuffle")) {
             blockBreakListener.shuffle()
             mobDeathListener.shuffle()

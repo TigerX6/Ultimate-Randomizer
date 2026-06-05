@@ -7,7 +7,7 @@ commands:
   randomizer:
     description: "General command for Ultimate Randomizer"
     usage: "/randomizer [start|stop|shuffle|players]"
-    aliases: [rm]
+    aliases: [ rm ]
     permission: randomizer.*
 permissions:
   randomizer.*:

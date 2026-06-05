@@ -23,7 +23,7 @@ class BlockBreakListener(plugin: Randomizer) : Listener {
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        if (randomizerCommand.challengeStatus == "start") {
+        if (randomizerCommand.randomizerStatus == "start") {
             if (!randomizerCommand.randomizerPlayers.contains(event.player.name) && config.getBoolean("use_player_list")) return
             if (event.player.gameMode == GameMode.CREATIVE && !config.getBoolean("creative-drops")) return
 

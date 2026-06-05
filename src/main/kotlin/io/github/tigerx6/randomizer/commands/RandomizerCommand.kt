@@ -20,7 +20,7 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
 
     val mobDeathListener = plugin.mobDeathListener
     val blockBreakListener = plugin.blockBreakListener
-    var challengeStatus = "end"
+    var randomizerStatus = "end"
     val randomizerPlayers: MutableList<String> = mutableListOf()
     val onlinePlayers: MutableList<String> = mutableListOf()
     private val config: FileConfiguration = plugin.config
@@ -125,7 +125,7 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
                 return sendArgError()
             }
             sendArgError()
-        } else if (challengeStatus == "end" && sender.hasPermission("randomizer.randomizer")) {
+        } else if (randomizerStatus == "end" && sender.hasPermission("randomizer.randomizer")) {
             messageSender("plugin-messages.status-off")
             return true
         } else {

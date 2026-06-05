@@ -12,14 +12,14 @@ import org.bukkit.configuration.file.FileConfiguration
 class Stop(plugin: Randomizer) : CommandExecutor {
 
     private val randomizerCommand = plugin.randomizerCommand
-    private var challengeStatus = randomizerCommand.challengeStatus
+    private var randomizerStatus = randomizerCommand.randomizerStatus
     private val config: FileConfiguration = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
-        if (challengeStatus == "end") {
+        if (randomizerStatus == "end") {
             sender.sendMessage(
                 prefix.append(
                     mm.deserialize("${config.getString("plugin-messages.already-disabled")}")
@@ -28,7 +28,7 @@ class Stop(plugin: Randomizer) : CommandExecutor {
             return true
         }
 
-        randomizerCommand.challengeStatus = "end"
+        randomizerCommand.randomizerStatus = "end"
         Bukkit.broadcast(
             prefix
                 .append(mm.deserialize("${config.getString("plugin-messages.randomizer-off")}"))

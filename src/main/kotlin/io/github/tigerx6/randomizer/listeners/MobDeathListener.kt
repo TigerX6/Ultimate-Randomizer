@@ -25,7 +25,7 @@ class MobDeathListener(plugin: Randomizer) : Listener {
 
     @EventHandler
     fun onEntityDeath(event: EntityDeathEvent) {
-        if (randomizerCommand.challengeStatus == "start") {
+        if (randomizerCommand.randomizerStatus == "start") {
             if (!randomizerCommand.randomizerPlayers.contains(event.entity.killer?.name) && config.getBoolean("use_player_list")) return
             if (event.entity.killer?.gameMode == GameMode.CREATIVE && config.getBoolean("creative-drops")) return
 
