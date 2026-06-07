@@ -8,14 +8,13 @@ import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.configuration.file.FileConfiguration
 
 class Start(plugin: Randomizer, private val randomizerCommand: RandomizerCommand) : CommandExecutor {
 
     private var randomizerStatus = randomizerCommand.randomizerStatus
     private val blockBreakListener = randomizerCommand.blockBreakListener
     private val mobDeathListener = randomizerCommand.mobDeathListener
-    private val config: FileConfiguration = plugin.config
+    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
 

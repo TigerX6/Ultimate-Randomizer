@@ -4,7 +4,6 @@ import io.github.tigerx6.randomizer.Randomizer
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
-import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Mob
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -19,7 +18,7 @@ class MobDeathListener(private val plugin: Randomizer) : Listener {
     var database = plugin.database
 
     var randomItemMap: MutableMap<Material, Material> = mutableMapOf()
-    private val config: FileConfiguration = plugin.config
+    private val config = plugin.config
 
     fun shuffle() {
         randomItemMap.clear()

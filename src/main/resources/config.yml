@@ -2,7 +2,7 @@ block_drops:
   randomize_block_drops: true
   min_block_drops: 1
   max_block_drops: 10
-  # a random number between min_block_drops and max_block_drops will determine the amount of items dropped
+  # A random number between min_block_drops and max_block_drops will determine the amount of items dropped
 
 mob_drops:
   randomize_mob_drops: true
@@ -10,21 +10,21 @@ mob_drops:
 
   min_mob_drops: 1
   max_mob_drops: 10
-  # a random number between min_mob_drops and max_mob_drops will determine the amount of items dropped
+  # A random number between min_mob_drops and max_mob_drops will determine the amount of items dropped
   min_mob_xp: 1
   max_mob_xp: 50
-  # a random number between min_mob_xp and max_mob_xp will determine the amount of xp dropped
+  # A random number between min_mob_xp and max_mob_xp will determine the amount of xp dropped
 
 show_timer: true
 use_player_list: false
 auto-shuffle: false
-# when true, the randomizer will automatically shuffle when started
+# When true, the randomizer will automatically shuffle when started
 save-random-pairs: true
-# when true, the generated random pairs will be saved. When false, a block will drop a different item each time it is broken
+# When true, the generated random pairs will be saved. When false, a block will drop a different item each time it is broken
 creative-drops: true
-# when true, players in creative mode are affected by the randomizer
+# When true, players in creative mode are affected by the randomizer
 
-# plugin messages support Minimessage formatting -> https://docs.papermc.io/adventure/minimessage/format/
+# Plugin messages support Minimessage formatting -> https://docs.papermc.io/adventure/minimessage/format/
 plugin-messages:
   prefix: "[<rainbow>Randomizer</rainbow>] "
   randomizer-on: "Randomizer is now <bold><green>enabled"

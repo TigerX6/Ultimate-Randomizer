@@ -1,20 +1,19 @@
 package io.github.tigerx6.randomizer.commands.subCommands
 
-import io.github.tigerx6.randomizer.commands.RandomizerCommand
 import io.github.tigerx6.randomizer.Randomizer
+import io.github.tigerx6.randomizer.commands.RandomizerCommand
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.configuration.file.FileConfiguration
 
 class Shuffle(plugin: Randomizer, randomizerCommand: RandomizerCommand) : CommandExecutor {
 
     private val blockBreakListener = randomizerCommand.blockBreakListener
     private val mobDeathListener = randomizerCommand.mobDeathListener
-    private val config: FileConfiguration = plugin.config
+    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
 

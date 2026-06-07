@@ -6,13 +6,12 @@ import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import org.bukkit.configuration.file.FileConfiguration
 
 class Players(plugin: Randomizer) : CommandExecutor {
 
     private val randomizerCommand = plugin.randomizerCommand
     private val randomizerPlayers = randomizerCommand.randomizerPlayers
-    private val config: FileConfiguration = plugin.config
+    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
 

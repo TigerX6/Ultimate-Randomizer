@@ -8,7 +8,6 @@ import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
-import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.scheduler.BukkitTask
 import kotlin.time.Duration.Companion.seconds
 
@@ -19,7 +18,7 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
     var randomizerStatus = "end"
     val randomizerPlayers: MutableList<String> = mutableListOf()
     val onlinePlayers: MutableList<String> = mutableListOf()
-    private val config: FileConfiguration = plugin.config
+    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
     private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
 
