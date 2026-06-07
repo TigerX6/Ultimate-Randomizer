@@ -140,10 +140,10 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
     private var timerString = ""
 
     fun startTimer() {
-        val timerText = plugin.config.getString("timer_style")
-        var timerFormat = plugin.config.getInt("timer_format")
+        val timerText = plugin.config.getString("timer-style")
+        var timerFormat = plugin.config.getInt("timer-format")
         if (timerFormat !in 1..2) {
-            plugin.config.set("timer_format", 1)
+            plugin.config.set("timer-format", 1)
             plugin.saveConfig()
             timerFormat = 1
         }

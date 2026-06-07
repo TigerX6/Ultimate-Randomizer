@@ -1,23 +1,23 @@
-block_drops:
-  randomize_block_drops: true
-  min_block_drops: 1
-  max_block_drops: 10
-  # A random number between min_block_drops and max_block_drops will determine the amount of items dropped
+block-drops:
+  randomize-block-drops: true
+  min-block-drops: 1
+  max-block-drops: 10
+  # A random number between min-block-drops and max-block-drops will determine the amount of items dropped
 
-mob_drops:
-  randomize_mob_drops: true
-  randomize_mob_xp_drops: true
+mob-drops:
+  randomize-mob-drops: true
+  randomize-mob-xp-drops: true
 
-  min_mob_drops: 1
-  max_mob_drops: 10
-  # A random number between min_mob_drops and max_mob_drops will determine the amount of items dropped
-  min_mob_xp: 1
-  max_mob_xp: 50
-  # A random number between min_mob_xp and max_mob_xp will determine the amount of xp dropped
+  min-mob-drops: 1
+  max-mob-drops: 10
+  # A random number between min-mob-drops and max-mob-drops will determine the amount of items dropped
+  min-mob-xp: 1
+  max-mob-xp: 50
+  # A random number between min-mob-xp and max-mob-xp will determine the amount of xp dropped
 
-show_timer: true
-timer_style: "<gradient:gold:yellow><time>"
-timer_format: 1
+show-timer: true
+timer-style: "<gradient:gold:yellow><time>"
+timer-format: 1
 # 1: e.g. 1h 1m 1s
 # 2: e.g. 01 : 01 : 01
 use_player_list: false
@@ -34,6 +34,7 @@ plugin-messages:
   randomizer-on: "Randomizer is now <bold><green>enabled"
   randomizer-on-shuffle: "Randomizer is now <bold><green>enabled<reset> and shuffled"
   randomizer-off: "Randomizer is now <bold><red>disabled"
+  config-reload: "Reloaded the config"
   already-enabled: "<red><bold>Error:</bold> Randomizer is already ON"
   already-disabled: "<red><bold>Error:</bold> Randomizer is already OFF"
   status-on: "Randomizer is currently <bold><green>enabled"

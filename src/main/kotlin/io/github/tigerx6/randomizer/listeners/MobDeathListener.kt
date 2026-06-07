@@ -34,7 +34,7 @@ class MobDeathListener(private val plugin: Randomizer) : Listener {
             if (event.entity.killer?.gameMode == GameMode.CREATIVE && !config.getBoolean("creative-drops")) return
 
             if (event.entity is Mob) {
-                if (config.getBoolean("mob_drops.randomize_mob_drops")) {
+                if (config.getBoolean("mob-drops.randomize-mob-drops")) {
                     event.drops.replaceAll {
                         var material = randomItemMap[it.type]
                         if (material == null) {
@@ -53,16 +53,16 @@ class MobDeathListener(private val plugin: Randomizer) : Listener {
                         ItemStack(
                             material,
                             Random.nextInt(
-                                config.getInt("mob_drops.min_mob_drops"),
-                                config.getInt("mob_drops.max_mob_drops")
+                                config.getInt("mob-drops.min-mob-drops"),
+                                config.getInt("mob-drops.max-mob-drops")
                             )
                         )
                     }
                 }
 
-                if (config.getBoolean("mob_drops.randomize_mob_xp_drops")) {
+                if (config.getBoolean("mob-drops.randomize-mob-xp-drops")) {
                     event.droppedExp =
-                        Random.nextInt(config.getInt("mob_drops.min_mob_xp"), config.getInt("mob_drops.max_mob_xp"))
+                        Random.nextInt(config.getInt("mob-drops.min-mob-xp"), config.getInt("mob-drops.max-mob-xp"))
                 }
             }
         }

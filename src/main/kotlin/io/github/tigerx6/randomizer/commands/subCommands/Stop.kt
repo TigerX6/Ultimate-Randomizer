@@ -33,7 +33,7 @@ class Stop(plugin: Randomizer) : CommandExecutor {
                 .append(mm.deserialize("${config.getString("plugin-messages.randomizer-off")}"))
         )
 
-        if (config.getBoolean("show_timer")) {
+        if (config.getBoolean("show-timer")) {
             randomizerCommand.stopTimer()
         }
         return true

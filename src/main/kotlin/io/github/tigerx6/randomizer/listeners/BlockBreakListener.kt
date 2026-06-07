@@ -32,7 +32,7 @@ class BlockBreakListener(private val plugin: Randomizer) : Listener {
             if (!randomizerCommand.randomizerPlayers.contains(event.player.name) && config.getBoolean("use_player_list")) return
             if (event.player.gameMode == GameMode.CREATIVE && !config.getBoolean("creative-drops")) return
 
-            if (config.getBoolean("block_drops.randomize_block_drops")) {
+            if (config.getBoolean("block-drops.randomize-block-drops")) {
                 event.isDropItems = false
                 var material = randomItemMap[event.block.type]
 
@@ -53,8 +53,8 @@ class BlockBreakListener(private val plugin: Randomizer) : Listener {
                 val itemStack = ItemStack(
                     material,
                     Random.nextInt(
-                        config.getInt("block_drops.min_block_drops"),
-                        config.getInt("block_drops.max_block_drops")
+                        config.getInt("block-drops.min-block-drops"),
+                        config.getInt("block-drops.max-block-drops")
                     )
                 )
                 event.player.world.dropItemNaturally(event.block.location, itemStack)

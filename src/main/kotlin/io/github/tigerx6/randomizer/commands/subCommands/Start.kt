@@ -41,7 +41,7 @@ class Start(plugin: Randomizer, private val randomizerCommand: RandomizerCommand
             )
         }
 
-        if (config.getBoolean("show_timer")) {
+        if (config.getBoolean("show-timer")) {
             randomizerCommand.stopTimer()
             randomizerCommand.startTimer()
         }
