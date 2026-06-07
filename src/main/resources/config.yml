@@ -16,6 +16,10 @@ mob_drops:
   # A random number between min_mob_xp and max_mob_xp will determine the amount of xp dropped
 
 show_timer: true
+timer_style: "<gradient:gold:yellow><time>"
+timer_format: 1
+# 1: e.g. 1h 1m 1s
+# 2: e.g. 01 : 01 : 01
 use_player_list: false
 auto-shuffle: false
 # When true, the randomizer will automatically shuffle when started

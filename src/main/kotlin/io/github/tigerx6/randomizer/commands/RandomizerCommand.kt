@@ -4,6 +4,7 @@ import io.github.tigerx6.randomizer.Randomizer
 import io.github.tigerx6.randomizer.commands.subCommands.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -135,21 +136,37 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
     // Timer
 
     private var elapsedS = 0.seconds
-    private var timerText = ""
     private var timer: BukkitTask? = null
+    private var timerString = ""
 
     fun startTimer() {
+        val timerText = plugin.config.getString("timer_style")
+        var timerFormat = plugin.config.getInt("timer_format")
+        if (timerFormat !in 1..2) {
+            plugin.config.set("timer_format", 1)
+            plugin.saveConfig()
+            timerFormat = 1
+        }
         timer =
             plugin.server.scheduler.runTaskTimer(
                 plugin, Runnable {
                     elapsedS += 1.seconds
-                    timerText = elapsedS.toComponents { hours, minutes, seconds, _ ->
-                        String.format("%02d : %02d : %02d", hours, minutes, seconds)
+                    timerString = elapsedS.toComponents { hours, minutes, seconds, _ ->
+                        when (timerFormat) {
+                            1 -> listOfNotNull(
+                                if (hours != 0L) "${hours}h" else null,
+                                if (minutes != 0) "${minutes}m" else null,
+                                if (seconds != 0) "${seconds}s" else null,
+                            ).joinToString(" ")
+
+                            2 -> String.format("%02d : %02d : %02d", hours, minutes, seconds)
+                            else -> ""
+                        }
                     }
                     for (player in Bukkit.getOnlinePlayers()) {
                         if (!randomizerPlayers.contains(player.name) && config.getBoolean("use_player_list")) continue
                         player.sendActionBar(
-                            mm.deserialize("<b><gradient:yellow:gold:1>$timerText")
+                            mm.deserialize("$timerText", Placeholder.unparsed("time", timerString))
                         )
                     }
                 },
