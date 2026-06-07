@@ -1,7 +1,7 @@
 package io.github.tigerx6.randomizer.commands
 
-import io.github.tigerx6.randomizer.commands.subCommands.*
 import io.github.tigerx6.randomizer.Randomizer
+import io.github.tigerx6.randomizer.commands.subCommands.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
@@ -9,11 +9,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
 import org.bukkit.configuration.file.FileConfiguration
-import java.util.*
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.ScheduledFuture
-import java.util.concurrent.TimeUnit
+import org.bukkit.scheduler.BukkitTask
 import kotlin.time.Duration.Companion.seconds
 
 class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
@@ -138,15 +134,15 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
     }
 
     // Timer
-    private val executorService: ScheduledExecutorService = Executors.newScheduledThreadPool(0)
-    private var scheduledFuture: ScheduledFuture<*>? = null
+
     private var elapsedS = 0.seconds
-    var timerText = ""
+    private var timerText = ""
+    private var timer: BukkitTask? = null
 
     fun startTimer() {
-        scheduledFuture = executorService.scheduleAtFixedRate(
-            object : TimerTask() {
-                override fun run() {
+        timer =
+            plugin.server.scheduler.runTaskTimer(
+                plugin, Runnable {
                     elapsedS += 1.seconds
                     timerText = elapsedS.toComponents { hours, minutes, seconds, _ ->
                         String.format("%02d : %02d : %02d", hours, minutes, seconds)
@@ -157,14 +153,13 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
                             mm.deserialize("<b><gradient:yellow:gold:1>$timerText")
                         )
                     }
-                }
-            },
-            0, 1, TimeUnit.SECONDS
-        )
+                },
+                0, 20
+            )
     }
 
     fun stopTimer() {
-        scheduledFuture?.cancel(false)
+        timer?.cancel()
         elapsedS = 0.seconds
     }
 
