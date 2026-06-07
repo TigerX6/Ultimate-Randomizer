@@ -24,7 +24,7 @@ save-random-pairs: true
 creative-drops: true
 # when true, players in creative mode are affected by the randomizer
 
-# plugin messages support Minimessage formatting -> https://docs.advntr.dev/minimessage/format.html
+# plugin messages support Minimessage formatting -> https://docs.papermc.io/adventure/minimessage/format/
 plugin-messages:
   prefix: "[<rainbow>Randomizer</rainbow>] "
   randomizer-on: "Randomizer is now <bold><green>enabled"
