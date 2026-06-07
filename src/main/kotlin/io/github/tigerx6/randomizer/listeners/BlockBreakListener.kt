@@ -1,6 +1,7 @@
 package io.github.tigerx6.randomizer.listeners
 
 import io.github.tigerx6.randomizer.Randomizer
+import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -10,15 +11,19 @@ import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
 
-class BlockBreakListener(plugin: Randomizer) : Listener {
+class BlockBreakListener(private val plugin: Randomizer) : Listener {
 
     var randomizerCommand = plugin.randomizerCommand
+    var database = plugin.database
 
-    private val randomItemMap: MutableMap<Material, Material> = mutableMapOf()
+    var randomItemMap: MutableMap<Material, Material> = mutableMapOf()
     private val config = plugin.config
 
     fun shuffle() {
         randomItemMap.clear()
+        Bukkit.getScheduler().runTaskAsynchronously(plugin) { _ ->
+            database?.deleteData("blocks")
+        }
     }
 
     @EventHandler
@@ -38,6 +43,10 @@ class BlockBreakListener(plugin: Randomizer) : Listener {
 
                     if (config.getBoolean("save-random-pairs")) {
                         randomItemMap[event.block.type] = material
+                        val eventBlock = event.block.type
+                        Bukkit.getScheduler().runTaskAsynchronously(plugin) { _ ->
+                            database?.savePair("blocks", eventBlock.toString(), material.toString())
+                        }
                     }
                 }
 

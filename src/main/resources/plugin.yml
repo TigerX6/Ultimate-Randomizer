@@ -21,3 +21,5 @@ permissions:
       randomizer.players: true
       randomizer.players.add: true
       randomizer.players.remove: true
+libraries:
+  - com.zaxxer:HikariCP:7.0.2

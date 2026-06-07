@@ -1,6 +1,7 @@
 package io.github.tigerx6.randomizer.listeners
 
 import io.github.tigerx6.randomizer.Randomizer
+import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.configuration.file.FileConfiguration
@@ -12,15 +13,19 @@ import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
 
-class MobDeathListener(plugin: Randomizer) : Listener {
+class MobDeathListener(private val plugin: Randomizer) : Listener {
 
     var randomizerCommand = plugin.randomizerCommand
+    var database = plugin.database
 
-    private val randomItemMap: MutableMap<Material, Material> = mutableMapOf()
+    var randomItemMap: MutableMap<Material, Material> = mutableMapOf()
     private val config: FileConfiguration = plugin.config
 
     fun shuffle() {
         randomItemMap.clear()
+        Bukkit.getScheduler().runTaskAsynchronously(plugin) { _ ->
+            database?.deleteData("mobs")
+        }
     }
 
     @EventHandler
@@ -40,6 +45,10 @@ class MobDeathListener(plugin: Randomizer) : Listener {
 
                             if (config.getBoolean("save-random-pairs")) {
                                 randomItemMap[it.type] = material
+                                val eventDrop = it.type
+                                Bukkit.getScheduler().runTaskAsynchronously(plugin) { _ ->
+                                    database?.savePair("mobs", eventDrop.toString(), material.toString())
+                                }
                             }
                         }
                         ItemStack(
