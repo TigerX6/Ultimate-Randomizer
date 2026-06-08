@@ -39,7 +39,9 @@ class BlockBreakListener(private val plugin: Randomizer) : Listener {
                 if (material == null) {
                     do {
                         material = Material.entries[Random.nextInt(0, Material.entries.size)]
-                    } while (!material!!.isItem)
+                    } while (!material!!.isItem || plugin.config.getList("item-blacklist", listOf(""))!!
+                            .contains(material.toString())
+                    )
 
                     if (plugin.config.getBoolean("save-random-pairs")) {
                         randomItemMap[event.block.type] = material

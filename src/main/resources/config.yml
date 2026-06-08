@@ -15,6 +15,10 @@ mob-drops:
   max-mob-xp: 50
   # A random number between min-mob-xp and max-mob-xp will determine the amount of xp dropped
 
+item-blacklist:
+#- BARRIER
+#- BEDROCK
+
 show-timer: true
 timer-style: "<gradient:gold:yellow><time>"
 timer-format: 1
