@@ -33,7 +33,8 @@ class BlockBreakListener(private val plugin: Randomizer) : Listener {
 
             if (plugin.config.getBoolean("block-drops.randomize-block-drops")) {
                 event.isDropItems = false
-                var material = randomItemMap[event.block.type]
+                var material =
+                    if (plugin.config.getBoolean("save-random-pairs")) randomItemMap[event.block.type] else null
 
                 if (material == null) {
                     do {
