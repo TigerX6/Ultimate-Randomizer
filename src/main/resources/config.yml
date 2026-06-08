@@ -20,7 +20,7 @@ timer-style: "<gradient:gold:yellow><time>"
 timer-format: 1
 # 1: e.g. 1h 1m 1s
 # 2: e.g. 01 : 01 : 01
-use_player_list: false
+use-player-list: false
 auto-shuffle: false
 # When true, the randomizer will automatically shuffle when started
 save-random-pairs: true

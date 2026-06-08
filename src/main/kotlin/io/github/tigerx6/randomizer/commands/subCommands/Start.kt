@@ -9,39 +9,38 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
-class Start(plugin: Randomizer, private val randomizerCommand: RandomizerCommand) : CommandExecutor {
+class Start(private val plugin: Randomizer, private val randomizerCommand: RandomizerCommand) : CommandExecutor {
 
     private var randomizerStatus = randomizerCommand.randomizerStatus
     private val blockBreakListener = randomizerCommand.blockBreakListener
     private val mobDeathListener = randomizerCommand.mobDeathListener
-    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
-    private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
+    private val prefix: Component = mm.deserialize("${plugin.config.getString("plugin-messages.prefix")}")
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
         if (randomizerStatus == "start") {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.already-enabled")}")
+                    mm.deserialize("${plugin.config.getString("plugin-messages.already-enabled")}")
                 )
             )
             return true
         }
 
         randomizerCommand.randomizerStatus = "start"
-        if (config.getBoolean("auto-shuffle")) {
+        if (plugin.config.getBoolean("auto-shuffle")) {
             blockBreakListener.shuffle()
             mobDeathListener.shuffle()
-            Bukkit.broadcast(prefix.append(mm.deserialize("${config.getString("plugin-messages.randomizer-on-shuffle")}")))
+            Bukkit.broadcast(prefix.append(mm.deserialize("${plugin.config.getString("plugin-messages.randomizer-on-shuffle")}")))
         } else {
             Bukkit.broadcast(
                 prefix
-                    .append(mm.deserialize("${config.getString("plugin-messages.randomizer-on")}"))
+                    .append(mm.deserialize("${plugin.config.getString("plugin-messages.randomizer-on")}"))
             )
         }
 
-        if (config.getBoolean("show-timer")) {
+        if (plugin.config.getBoolean("show-timer")) {
             randomizerCommand.stopTimer()
             randomizerCommand.startTimer()
         }

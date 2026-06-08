@@ -9,13 +9,12 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
-class Shuffle(plugin: Randomizer, randomizerCommand: RandomizerCommand) : CommandExecutor {
+class Shuffle(private val plugin: Randomizer, randomizerCommand: RandomizerCommand) : CommandExecutor {
 
     private val blockBreakListener = randomizerCommand.blockBreakListener
     private val mobDeathListener = randomizerCommand.mobDeathListener
-    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
-    private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
+    private val prefix: Component = mm.deserialize("${plugin.config.getString("plugin-messages.prefix")}")
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
@@ -24,7 +23,7 @@ class Shuffle(plugin: Randomizer, randomizerCommand: RandomizerCommand) : Comman
                 mobDeathListener.shuffle()
                 Bukkit.broadcast(
                     prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled-mobs")}")
+                        mm.deserialize("${plugin.config.getString("plugin-messages.randomizer-shuffled-mobs")}")
                     )
                 )
                 return true
@@ -34,7 +33,7 @@ class Shuffle(plugin: Randomizer, randomizerCommand: RandomizerCommand) : Comman
                 blockBreakListener.shuffle()
                 Bukkit.broadcast(
                     prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled-blocks")}")
+                        mm.deserialize("${plugin.config.getString("plugin-messages.randomizer-shuffled-blocks")}")
                     )
                 )
                 return true
@@ -47,13 +46,13 @@ class Shuffle(plugin: Randomizer, randomizerCommand: RandomizerCommand) : Comman
 
             Bukkit.broadcast(
                 prefix
-                    .append(mm.deserialize("${config.getString("plugin-messages.randomizer-shuffled")}"))
+                    .append(mm.deserialize("${plugin.config.getString("plugin-messages.randomizer-shuffled")}"))
             )
             return true
         }
         sender.sendMessage(
             prefix.append(
-                mm.deserialize("${config.getString("plugin-messages.argument-error")}")
+                mm.deserialize("${plugin.config.getString("plugin-messages.argument-error")}")
             )
         )
         return true

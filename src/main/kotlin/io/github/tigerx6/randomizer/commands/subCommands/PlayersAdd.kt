@@ -9,14 +9,13 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
-class PlayersAdd(plugin: Randomizer) : CommandExecutor {
+class PlayersAdd(private val plugin: Randomizer) : CommandExecutor {
 
     private val randomizerCommand = plugin.randomizerCommand
     private val randomizerPlayers = randomizerCommand.randomizerPlayers
     private val onlinePlayers = randomizerCommand.onlinePlayers
-    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
-    private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
+    private val prefix: Component = mm.deserialize("${plugin.config.getString("plugin-messages.prefix")}")
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.size == 3) {
@@ -26,7 +25,7 @@ class PlayersAdd(plugin: Randomizer) : CommandExecutor {
                     sender.sendMessage(
                         prefix.append(
                             mm.deserialize(
-                                "${config.getString("plugin-messages.added-player")}",
+                                "${plugin.config.getString("plugin-messages.added-player")}",
                                 Placeholder.component("player", Component.text(args[2], NamedTextColor.GOLD))
                             )
                         )
@@ -34,7 +33,7 @@ class PlayersAdd(plugin: Randomizer) : CommandExecutor {
                 } else {
                     sender.sendMessage(
                         prefix.append(
-                            mm.deserialize("${config.getString("plugin-messages.player-already-added")}")
+                            mm.deserialize("${plugin.config.getString("plugin-messages.player-already-added")}")
                         )
                     )
                 }
@@ -45,20 +44,20 @@ class PlayersAdd(plugin: Randomizer) : CommandExecutor {
                 }
                 sender.sendMessage(
                     prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.added-all-players")}")
+                        mm.deserialize("${plugin.config.getString("plugin-messages.added-all-players")}")
                     )
                 )
             } else {
                 sender.sendMessage(
                     prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.argument-error")}")
+                        mm.deserialize("${plugin.config.getString("plugin-messages.argument-error")}")
                     )
                 )
             }
         } else {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.argument-error")}")
+                    mm.deserialize("${plugin.config.getString("plugin-messages.argument-error")}")
                 )
             )
         }

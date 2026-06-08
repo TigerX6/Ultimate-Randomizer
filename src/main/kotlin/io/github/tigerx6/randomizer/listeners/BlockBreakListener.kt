@@ -17,7 +17,6 @@ class BlockBreakListener(private val plugin: Randomizer) : Listener {
     var database = plugin.database
 
     var randomItemMap: MutableMap<Material, Material> = mutableMapOf()
-    private val config = plugin.config
 
     fun shuffle() {
         randomItemMap.clear()
@@ -29,10 +28,10 @@ class BlockBreakListener(private val plugin: Randomizer) : Listener {
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
         if (randomizerCommand.randomizerStatus == "start") {
-            if (!randomizerCommand.randomizerPlayers.contains(event.player.name) && config.getBoolean("use_player_list")) return
-            if (event.player.gameMode == GameMode.CREATIVE && !config.getBoolean("creative-drops")) return
+            if (!randomizerCommand.randomizerPlayers.contains(event.player.name) && plugin.config.getBoolean("use-player-list")) return
+            if (event.player.gameMode == GameMode.CREATIVE && !plugin.config.getBoolean("creative-drops")) return
 
-            if (config.getBoolean("block-drops.randomize-block-drops")) {
+            if (plugin.config.getBoolean("block-drops.randomize-block-drops")) {
                 event.isDropItems = false
                 var material = randomItemMap[event.block.type]
 
@@ -41,7 +40,7 @@ class BlockBreakListener(private val plugin: Randomizer) : Listener {
                         material = Material.entries[Random.nextInt(0, Material.entries.size)]
                     } while (!material!!.isItem)
 
-                    if (config.getBoolean("save-random-pairs")) {
+                    if (plugin.config.getBoolean("save-random-pairs")) {
                         randomItemMap[event.block.type] = material
                         val eventBlock = event.block.type
                         Bukkit.getScheduler().runTaskAsynchronously(plugin) { _ ->
@@ -53,8 +52,8 @@ class BlockBreakListener(private val plugin: Randomizer) : Listener {
                 val itemStack = ItemStack(
                     material,
                     Random.nextInt(
-                        config.getInt("block-drops.min-block-drops"),
-                        config.getInt("block-drops.max-block-drops")
+                        plugin.config.getInt("block-drops.min-block-drops"),
+                        plugin.config.getInt("block-drops.max-block-drops")
                     )
                 )
                 event.player.world.dropItemNaturally(event.block.location, itemStack)

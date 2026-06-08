@@ -18,7 +18,6 @@ class MobDeathListener(private val plugin: Randomizer) : Listener {
     var database = plugin.database
 
     var randomItemMap: MutableMap<Material, Material> = mutableMapOf()
-    private val config = plugin.config
 
     fun shuffle() {
         randomItemMap.clear()
@@ -30,11 +29,11 @@ class MobDeathListener(private val plugin: Randomizer) : Listener {
     @EventHandler
     fun onEntityDeath(event: EntityDeathEvent) {
         if (randomizerCommand.randomizerStatus == "start") {
-            if (!randomizerCommand.randomizerPlayers.contains(event.entity.killer?.name) && config.getBoolean("use_player_list")) return
-            if (event.entity.killer?.gameMode == GameMode.CREATIVE && !config.getBoolean("creative-drops")) return
+            if (!randomizerCommand.randomizerPlayers.contains(event.entity.killer?.name) && plugin.config.getBoolean("use-player-list")) return
+            if (event.entity.killer?.gameMode == GameMode.CREATIVE && !plugin.config.getBoolean("creative-drops")) return
 
             if (event.entity is Mob) {
-                if (config.getBoolean("mob-drops.randomize-mob-drops")) {
+                if (plugin.config.getBoolean("mob-drops.randomize-mob-drops")) {
                     event.drops.replaceAll {
                         var material = randomItemMap[it.type]
                         if (material == null) {
@@ -42,7 +41,7 @@ class MobDeathListener(private val plugin: Randomizer) : Listener {
                                 material = Material.entries[Random.nextInt(0, Material.entries.size)]
                             } while (!material!!.isItem)
 
-                            if (config.getBoolean("save-random-pairs")) {
+                            if (plugin.config.getBoolean("save-random-pairs")) {
                                 randomItemMap[it.type] = material
                                 val eventDrop = it.type
                                 Bukkit.getScheduler().runTaskAsynchronously(plugin) { _ ->
@@ -53,16 +52,19 @@ class MobDeathListener(private val plugin: Randomizer) : Listener {
                         ItemStack(
                             material,
                             Random.nextInt(
-                                config.getInt("mob-drops.min-mob-drops"),
-                                config.getInt("mob-drops.max-mob-drops")
+                                plugin.config.getInt("mob-drops.min-mob-drops"),
+                                plugin.config.getInt("mob-drops.max-mob-drops")
                             )
                         )
                     }
                 }
 
-                if (config.getBoolean("mob-drops.randomize-mob-xp-drops")) {
+                if (plugin.config.getBoolean("mob-drops.randomize-mob-xp-drops")) {
                     event.droppedExp =
-                        Random.nextInt(config.getInt("mob-drops.min-mob-xp"), config.getInt("mob-drops.max-mob-xp"))
+                        Random.nextInt(
+                            plugin.config.getInt("mob-drops.min-mob-xp"),
+                            plugin.config.getInt("mob-drops.max-mob-xp")
+                        )
                 }
             }
         }

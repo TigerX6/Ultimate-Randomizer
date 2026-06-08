@@ -9,14 +9,13 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
-class PlayersRemove(plugin: Randomizer) : CommandExecutor {
+class PlayersRemove(private val plugin: Randomizer) : CommandExecutor {
 
     private val randomizerCommand = plugin.randomizerCommand
     private val randomizerPlayers = randomizerCommand.randomizerPlayers
     private val onlinePlayers = randomizerCommand.onlinePlayers
-    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
-    private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
+    private val prefix: Component = mm.deserialize("${plugin.config.getString("plugin-messages.prefix")}")
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.size == 3) {
@@ -26,7 +25,7 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
                     sender.sendMessage(
                         prefix.append(
                             mm.deserialize(
-                                "${config.getString("plugin-messages.removed-player")}",
+                                "${plugin.config.getString("plugin-messages.removed-player")}",
                                 Placeholder.component("player", Component.text(args[2], NamedTextColor.GOLD))
                             )
                         )
@@ -34,7 +33,7 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
                 } else {
                     sender.sendMessage(
                         prefix.append(
-                            mm.deserialize("${config.getString("plugin-messages.player-already-removed")}")
+                            mm.deserialize("${plugin.config.getString("plugin-messages.player-already-removed")}")
                         )
                     )
                 }
@@ -42,20 +41,20 @@ class PlayersRemove(plugin: Randomizer) : CommandExecutor {
                 randomizerCommand.randomizerPlayers.clear()
                 sender.sendMessage(
                     prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.removed-all-players")}")
+                        mm.deserialize("${plugin.config.getString("plugin-messages.removed-all-players")}")
                     )
                 )
             } else {
                 sender.sendMessage(
                     prefix.append(
-                        mm.deserialize("${config.getString("plugin-messages.argument-error")}")
+                        mm.deserialize("${plugin.config.getString("plugin-messages.argument-error")}")
                     )
                 )
             }
         } else {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.argument-error")}")
+                    mm.deserialize("${plugin.config.getString("plugin-messages.argument-error")}")
                 )
             )
         }

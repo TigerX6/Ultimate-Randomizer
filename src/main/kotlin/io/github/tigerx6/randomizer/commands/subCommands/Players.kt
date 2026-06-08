@@ -7,13 +7,12 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
-class Players(plugin: Randomizer) : CommandExecutor {
+class Players(private val plugin: Randomizer) : CommandExecutor {
 
     private val randomizerCommand = plugin.randomizerCommand
     private val randomizerPlayers = randomizerCommand.randomizerPlayers
-    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
-    private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
+    private val prefix: Component = mm.deserialize("${plugin.config.getString("plugin-messages.prefix")}")
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
@@ -21,7 +20,7 @@ class Players(plugin: Randomizer) : CommandExecutor {
             sender.sendMessage(
                 prefix.append(
                     mm.deserialize(
-                        "${config.getString("plugin-messages.current-players")}\n${
+                        "${plugin.config.getString("plugin-messages.current-players")}\n${
                             randomizerPlayers.joinToString(",\n")
                         }"
                     )
@@ -30,7 +29,7 @@ class Players(plugin: Randomizer) : CommandExecutor {
         } else {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString("plugin-messages.no-current-players")}")
+                    mm.deserialize("${plugin.config.getString("plugin-messages.no-current-players")}")
                 )
             )
         }

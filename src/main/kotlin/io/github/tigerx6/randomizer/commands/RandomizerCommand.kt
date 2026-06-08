@@ -19,9 +19,8 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
     var randomizerStatus = "end"
     val randomizerPlayers: MutableList<String> = mutableListOf()
     val onlinePlayers: MutableList<String> = mutableListOf()
-    private val config = plugin.config
     private var mm = MiniMessage.miniMessage()
-    private val prefix: Component = mm.deserialize("${config.getString("plugin-messages.prefix")}")
+    private val prefix: Component = mm.deserialize("${plugin.config.getString("plugin-messages.prefix")}")
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         // update onlinePlayers
@@ -33,7 +32,7 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
         fun messageSender(configPath: String) {
             sender.sendMessage(
                 prefix.append(
-                    mm.deserialize("${config.getString(configPath)}")
+                    mm.deserialize("${plugin.config.getString(configPath)}")
                 )
             )
         }
@@ -54,7 +53,7 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
             if (args[0] == "start") {
                 if (sender.hasPermission("randomizer.start")) {
                     return if (args.size == 1) {
-                        if (randomizerPlayers.isEmpty() && config.getBoolean("use_player_list")) {
+                        if (randomizerPlayers.isEmpty() && plugin.config.getBoolean("use-player-list")) {
                             messageSender("plugin-messages.empty-player-list")
                             return true
                         }
@@ -95,7 +94,7 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
 
             // players
             if (args[0] == "players") {
-                if (!config.getBoolean("use_player_list")) {
+                if (!plugin.config.getBoolean("use-player-list")) {
                     messageSender("plugin-messages.not-using-player-list")
                 }
                 if (args.size == 1) {
@@ -120,6 +119,22 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
                 }
                 return sendArgError()
             }
+
+            // reload
+            if (args[0] == "reload") {
+                if (sender.hasPermission("randomizer.reload")) {
+                    if (args.size == 1) {
+                        plugin.reloadConfig()
+                        messageSender("plugin-messages.config-reload")
+                    } else {
+                        sendArgError()
+                    }
+                } else {
+                    sendPermissionError()
+                }
+                return true
+            }
+
             sendArgError()
         } else if (randomizerStatus == "end" && sender.hasPermission("randomizer.randomizer")) {
             messageSender("plugin-messages.status-off")
@@ -164,7 +179,7 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
                         }
                     }
                     for (player in Bukkit.getOnlinePlayers()) {
-                        if (!randomizerPlayers.contains(player.name) && config.getBoolean("use_player_list")) continue
+                        if (!randomizerPlayers.contains(player.name) && plugin.config.getBoolean("use-player-list")) continue
                         player.sendActionBar(
                             mm.deserialize("$timerText", Placeholder.unparsed("time", timerString))
                         )
@@ -203,7 +218,7 @@ class RandomizerCommand(private val plugin: Randomizer) : TabExecutor {
         }
 
         return if (args.size == 1) {
-            mutableListOf("start", "stop", "shuffle", "players")
+            mutableListOf("start", "stop", "shuffle", "players", "reload")
         } else if (args.size == 2) {
             if (args[0] == "players") {
                 mutableListOf("add", "remove")
